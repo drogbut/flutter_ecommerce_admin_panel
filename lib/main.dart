@@ -13,7 +13,7 @@ Future<void> main() async {
   // Initialize GetX Local Storage
 
   // Remove # sign from url
-  setHashUrlStrategy();
+  setPathUrlStrategy();
 
   // Initialize Firebase & Authentication Repository
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);

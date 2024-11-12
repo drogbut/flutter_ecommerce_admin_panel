@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
-class TForgetPasswordPage extends StatelessWidget {
-  const TForgetPasswordPage({super.key});
+class TResetPasswordPage extends StatelessWidget {
+  const TResetPasswordPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text('Forget PasswordPage'),),
+      body: Center(
+        child: Text('Reset PasswordPage'),
+      ),
     );
   }
 }
