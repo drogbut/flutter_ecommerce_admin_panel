@@ -76,4 +76,5 @@ class DefaultFirebaseOptions {
     iosClientId: '813626309566-rlcpni1580i2mackilgb8drrf0jddahg.apps.googleusercontent.com',
     iosBundleId: 'com.example.flutterEcommerceAdminPanel',
   );
+
 }
