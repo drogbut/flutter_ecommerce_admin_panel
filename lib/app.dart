@@ -19,13 +19,8 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: TRoutes.login,
       getPages: TAppRoute.getPages,
-      unknownRoute: GetPage(
-          name: '/page_not_found',
-          page: () => Scaffold(
-                body: Center(
-                  child: Text('Page not found!'),
-                ),
-              )),
+      unknownRoute:
+          GetPage(name: '/page_not_found', page: () => Scaffold(body: Center(child: Text('Page not found!')))),
     );
   }
 }
