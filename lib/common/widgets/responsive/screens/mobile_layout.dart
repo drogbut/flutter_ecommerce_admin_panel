@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
 
+import '../../layout/headers/header.dart';
+
 class MobileLayout extends StatelessWidget {
-  const MobileLayout({super.key, this.body});
+  MobileLayout({super.key, this.body});
 
   /// Widget for body layout
   final Widget? body;
 
+  /// The global key to access of Scaffold state
+  final GlobalKey<ScaffoldState>? scaffoldKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: Drawer(
+      key: scaffoldKey,
+      drawer: Drawer(
         child: Center(child: Text('mobile drawer')),
       ),
-      appBar: AppBar(title: Text('mobile title')),
+      appBar: THeader(scaffoldKey: scaffoldKey),
       body: body ?? Center(child: Text('mobile body')),
     );
   }

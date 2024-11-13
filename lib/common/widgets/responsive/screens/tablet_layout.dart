@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
 
+import '../../layout/headers/header.dart';
+
 class TabletLayout extends StatelessWidget {
+  TabletLayout({super.key, this.body});
+
+  /// Widget for body layout
   final Widget? body;
-  const TabletLayout({super.key, this.body});
+
+  /// The global key to access of Scaffold state
+  final GlobalKey<ScaffoldState>? scaffoldKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       drawer: Drawer(
         child: Center(child: Text('Tablet drawer')),
       ),
-      appBar: AppBar(title: Text('tablet appbar')),
+      appBar: THeader(scaffoldKey: scaffoldKey),
       body: body ?? Center(child: Text('tablet body')),
     );
   }
