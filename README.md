@@ -12,6 +12,7 @@ The **Flutter E-commerce Admin Panel** is a web-based application built using Fl
 * Create responsive and adaptive layouts for desktop, tablet and mobile.
 
 ### ADMIN PANEL FEATURES
+* Create adaptive appbar for desktop, tablet and mobile.
 * 
 
 ### AUTHENTICATION
