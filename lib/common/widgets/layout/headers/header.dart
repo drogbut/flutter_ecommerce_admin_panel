@@ -24,6 +24,8 @@ class THeader extends StatelessWidget implements PreferredSizeWidget {
       ),
       padding: EdgeInsets.symmetric(horizontal: TSizes.md, vertical: TSizes.sm),
       child: AppBar(
+        elevation: 0.0,
+
         /// mobile Menu
         leading: (!TDeviceUtils.isDesktopScreen(context))
             ? IconButton(onPressed: () => scaffoldKey?.currentState?.openDrawer(), icon: Icon(Iconsax.menu))

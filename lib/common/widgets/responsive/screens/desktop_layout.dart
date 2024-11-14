@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../layout/headers/header.dart';
+import '../../layout/sidebars/sidebar.dart';
 
 class DesktopLayout extends StatelessWidget {
   const DesktopLayout({super.key, this.body});
@@ -14,10 +15,7 @@ class DesktopLayout extends StatelessWidget {
       body: Row(
         children: [
           /// LEFT
-          Expanded(
-              child: const Drawer(
-            child: Center(child: Text('desktop drawer')),
-          )),
+          Expanded(child: TSidebar()),
 
           /// RIGHT
           Expanded(
