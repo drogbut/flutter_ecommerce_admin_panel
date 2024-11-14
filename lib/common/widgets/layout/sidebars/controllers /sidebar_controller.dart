@@ -26,6 +26,8 @@ class SidebarController extends GetxController {
     if (!isActive(route)) {
       changeActiveItem(route);
       if (TDeviceUtils.isMobileScreen(Get.context!)) Get.back();
+
+      Get.toNamed(route);
     }
   }
 }
