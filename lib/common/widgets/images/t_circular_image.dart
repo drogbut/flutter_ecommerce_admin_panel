@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'dart:typed_data';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+
 import '../../../utils/constants/enums.dart';
 import '../../../utils/constants/sizes.dart';
 import '../shimmers/shimmer.dart';
@@ -82,7 +84,7 @@ class TCircularImage extends StatelessWidget {
       );
     } else {
       // Return an empty container if no image is provided
-      return Container();
+      return const SizedBox.shrink();
     }
   }
 
@@ -93,7 +95,7 @@ class TCircularImage extends StatelessWidget {
       return Image(fit: fit, image: MemoryImage(memoryImage!), color: overlayColor);
     } else {
       // Return an empty container if no image is provided
-      return Container();
+      return const SizedBox.shrink();
     }
   }
 
