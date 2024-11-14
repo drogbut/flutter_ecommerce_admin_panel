@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_admin_panel/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 
+import '../../../../routes/routes.dart';
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/image_strings.dart';
 import '../../images/t_circular_image.dart';
-import 'models/menu_item.dart';
 import 'widgets/menu_item.dart';
 
 class TSidebar extends StatelessWidget {
@@ -41,7 +41,7 @@ class TSidebar extends StatelessWidget {
                     color: TColors.darkerGrey,
                   )),
             ),
-            ...MenuItem.defaultMenuItems().map(
+            ...TRoutes.defaultMenuItems().map(
               (item) => Padding(
                 padding: const EdgeInsets.symmetric(horizontal: TSizes.sm),
                 child: TMenuItem(
@@ -60,7 +60,7 @@ class TSidebar extends StatelessWidget {
                     color: TColors.darkerGrey,
                   )),
             ),
-            ...MenuItem.settingsMenuItems().map(
+            ...TRoutes.settingsMenuItems().map(
               (item) => Padding(
                 padding: const EdgeInsets.symmetric(horizontal: TSizes.sm),
                 child: TMenuItem(
