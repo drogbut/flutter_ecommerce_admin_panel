@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 
-class TResetPasswordPage extends StatelessWidget {
-  const TResetPasswordPage({super.key});
+import '../../../../../common/widgets/layout/templates/size_layout.dart';
+import 'responsive_screens/desktop_tablet.dart';
+import 'responsive_screens/mobile.dart';
+
+class ResetPasswordScreen extends StatelessWidget {
+  const ResetPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text('Reset PasswordPage'),
-      ),
+    return TSizeTemplate(
+      useLayout: false,
+      desktop: ResetPasswordScreenDesktopTablet(),
+      mobile: ResetPasswordScreenMobile(),
     );
   }
 }

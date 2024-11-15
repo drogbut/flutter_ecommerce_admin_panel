@@ -9,7 +9,7 @@ import 'routes.dart';
 class TAppRoute {
   static List<GetPage> getPages = [
     GetPage(name: TRoutes.login, page: () => TLoginPage(), middlewares: [RouteMiddleWare()]),
-    GetPage(name: TRoutes.forgetPassword, page: () => TForgetPasswordPage()),
-    GetPage(name: TRoutes.resetPassword, page: () => TResetPasswordPage()),
+    GetPage(name: TRoutes.forgetPassword, page: () => ForgotPasswordScreen()),
+    GetPage(name: TRoutes.resetPassword, page: () => ResetPasswordScreen()),
   ];
 }
