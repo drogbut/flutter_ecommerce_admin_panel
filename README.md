@@ -3,19 +3,25 @@
 The **Flutter E-commerce Admin Panel** is a web-based application built using Flutter to manage and oversee the operations of an eCommerce platform. It allows admins to manage products, categories, orders, and users. The panel connects to a Firebase backend for real-time data management and synchronization, providing an efficient interface for business management.
 
 ## FRONTEND FEATURES
-### APP CONFIGURATIONS
+### CONFIGURATIONS & SETUPS
 * New project setup with feature-first folder structure.
 * Integrated Git for version control and connected the project to GitHub. 
 * configure admin_panel_app to use the same Firebase datas as ecommerce_app
-* Integrated light & dark modes (buttons, textfields, app bars, etc.).
 * Add Helper functions, utilities, and constants - code reusability.
-* Create responsive and adaptive layouts for desktop, tablet and mobile.
 
-### ADMIN PANEL FEATURES
+### ROUTING IN FLUTTER WEB
+* Understandig basics, navigation & Data passing
+* Handling the # from the Flutter Web URLs
+* 
+
+### RESPONSIV & ADAPTIV DESIGN
+* Create responsive and adaptive layouts for desktop, tablet and mobile.
 * Create adaptive appbar for desktop, tablet and mobile.
 * Create responsive sidebar - Handle Browser Back and Forward Buttons.
 
-### AUTHENTICATION
+### ADMIN MANAGEMENT
+* Design Responsiv Login Screen
+* Design Forget Password & Reset Password Screens
 * 
 
 ## BACKEND FEATURES
