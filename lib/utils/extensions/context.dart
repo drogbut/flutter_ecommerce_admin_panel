@@ -25,9 +25,6 @@ extension ContextExt on BuildContext {
   /// Provides access to the color scheme of the current theme.
   ColorScheme get colorScheme => theme.colorScheme;
 
-  /// Provides access to the text theme of the current theme.
-  TextTheme get textTheme => theme.textTheme;
-
   /// Provides access to the date picker theme data for the current context.
   DatePickerThemeData get datePickerTheme => DatePickerTheme.of(this);
 

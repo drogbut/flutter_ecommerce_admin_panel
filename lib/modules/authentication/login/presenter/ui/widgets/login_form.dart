@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_admin_panel/routes/routes.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -27,7 +28,7 @@ class LoginForm extends StatelessWidget {
             controller: controller.email,
             validator: (value) => TValidator.validateEmail(value),
             prefixIcon: Iconsax.direct_right,
-            label: TTexts.adminEmail,
+            label: TTexts.email,
           ),
           const SizedBox(height: TSizes.spaceBtwItems),
 
@@ -62,7 +63,7 @@ class LoginForm extends StatelessWidget {
               /// Forgot password
               TTertiaryButton(
                 title: '${TTexts.forgetPassword} ?',
-                onPressed: () {},
+                onPressed: () => Get.toNamed(TRoutes.forgetPassword),
               ),
             ],
           ),
