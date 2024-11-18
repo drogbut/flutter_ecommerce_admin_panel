@@ -17,10 +17,16 @@ class App extends StatelessWidget {
       theme: TAppTheme.lightTheme,
       darkTheme: TAppTheme.darkTheme,
       debugShowCheckedModeBanner: false,
-      initialRoute: TRoutes.login,
+      initialRoute: TRoutes.dashboard,
       getPages: TAppRoute.getPages,
-      unknownRoute:
-          GetPage(name: '/page_not_found', page: () => Scaffold(body: Center(child: Text('Page not found!')))),
+      unknownRoute: GetPage(
+          name: '/page_not_found',
+          page: () => Scaffold(
+                  body: Center(
+                      child: Text(
+                'Page not found!',
+                style: TextStyle(color: Colors.red),
+              )))),
     );
   }
 }

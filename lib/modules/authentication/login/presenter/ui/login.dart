@@ -6,8 +6,8 @@ import '../controllers/login_controller.dart';
 import 'responsive_screens/desktop_tablet.dart';
 import 'responsive_screens/mobile.dart';
 
-class TLoginPage extends StatelessWidget {
-  const TLoginPage({super.key});
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
