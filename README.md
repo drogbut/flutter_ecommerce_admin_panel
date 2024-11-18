@@ -12,7 +12,7 @@ The **Flutter E-commerce Admin Panel** is a web-based application built using Fl
 ### ROUTING IN FLUTTER WEB
 * Understandig basics, navigation & Data passing
 * Handling the # from the Flutter Web URLs
-* 
+* Redirect an unlogged-in user to the login page - GetMiddleware
 
 ### RESPONSIV & ADAPTIV DESIGN
 * Create responsive and adaptive layouts for desktop, tablet and mobile.
