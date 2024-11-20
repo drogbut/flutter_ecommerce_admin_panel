@@ -72,7 +72,7 @@ class LoginForm extends StatelessWidget {
           /// SignIn button
           TPrimaryButton(
             title: TTexts.signIn,
-            onPressed: () {},
+            onPressed: () => controller.signInWithEmailAndPassword(),
           ),
           const SizedBox(height: TSizes.spaceBtwItems),
         ],
