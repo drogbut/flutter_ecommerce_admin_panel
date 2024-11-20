@@ -32,7 +32,7 @@ The **Flutter E-commerce Admin Panel** is a web-based application built using Fl
 * 
 
 ## CI/CD FEATURES
-* 
+* Hide Generated Files on Android Studio or VSCode
 
 ## TECHNOLOGIES USED
 * **Flutter**: Cross-platform framework for building the admin panel (web-focused).
@@ -46,7 +46,6 @@ The **Flutter E-commerce Admin Panel** is a web-based application built using Fl
 * **Firebase Account**: For managing authentication and database operations.
 
 ## INSTALLATION
-
 1. **Clone the repository**:
     ```bash
     https://github.com/drogbut/flutter_ecommerce_admin_panel.git
@@ -57,14 +56,32 @@ The **Flutter E-commerce Admin Panel** is a web-based application built using Fl
     ```bash
     flutter pub get
     ```
-
 3. **Configure Firebase**:
     * Create a Firebase project and configure Firestore and authentication.
-
 4. **Run the project**:
     ```bash
     flutter run -d chrome
     ```
+5. Auto generate files
+```bash
+flutter packages pub run build_runner build --delete-conflicting-outputs
+```
+or watch command in order to keep the source code synced automatically:
+```bash
+flutter packages pub run build_runner watch
+```
+
+6. Hide Generated Files
+In-order to hide generated files, navigate to `Android Studio` -> `Preferences` -> `Editor` -> `File Types` and paste the below lines under `ignore files and folders` section:
+```bash
+*.inject.summary;*.inject.dart;*.g.dart;
+```
+In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `Files:Exclude`. Add the following patterns:
+```bash
+**/*.inject.summary
+**/*.inject.dart
+**/*.g.dart
+```
 
 ## FUTURE FEATURES
 * 

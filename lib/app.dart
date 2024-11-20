@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_admin_panel/bindings/general_bindings.dart';
 import 'package:flutter_ecommerce_admin_panel/routes/app_routes.dart';
 import 'package:flutter_ecommerce_admin_panel/routes/routes.dart';
 import 'package:get/get.dart';
@@ -18,15 +19,12 @@ class App extends StatelessWidget {
       darkTheme: TAppTheme.darkTheme,
       debugShowCheckedModeBanner: false,
       initialRoute: TRoutes.dashboard,
+      initialBinding: GeneralBindings(),
       getPages: TAppRoute.getPages,
       unknownRoute: GetPage(
-          name: '/page_not_found',
-          page: () => Scaffold(
-                  body: Center(
-                      child: Text(
-                'Page not found!',
-                style: TextStyle(color: Colors.red),
-              )))),
+        name: '/page_not_found',
+        page: () => Scaffold(body: Center(child: Text('Page not found!', style: TextStyle(color: Colors.red)))),
+      ),
     );
   }
 }

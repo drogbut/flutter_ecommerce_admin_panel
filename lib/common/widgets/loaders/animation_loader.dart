@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../utils/constants/colors.dart';
@@ -20,7 +21,10 @@ class TAnimationLoaderWidget extends StatelessWidget {
     required this.animation,
     this.showAction = false,
     this.actionText,
-    this.onActionPressed, this.height, this.width, this.style,
+    this.onActionPressed,
+    this.height,
+    this.width,
+    this.style,
   });
 
   final String text;
@@ -37,11 +41,15 @@ class TAnimationLoaderWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Lottie.asset(animation, height: height ?? MediaQuery.of(context).size.height * 0.5, width: width), // Display Lottie animation
+          Lottie.asset(
+            animation,
+            height: height ?? MediaQuery.of(context).size.height * 0.5,
+            width: width,
+          ), // Display Lottie animation
           const SizedBox(height: TSizes.defaultSpace),
           Text(
             text,
-            style: style ?? Theme.of(context).textTheme.bodyMedium,
+            style: style ?? context.textTheme.bodyMedium,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: TSizes.defaultSpace),
@@ -53,7 +61,7 @@ class TAnimationLoaderWidget extends StatelessWidget {
                     style: OutlinedButton.styleFrom(backgroundColor: TColors.dark),
                     child: Text(
                       actionText!,
-                      style: Theme.of(context).textTheme.bodyMedium!.apply(color: TColors.light),
+                      style: context.textTheme.bodyMedium!.apply(color: TColors.light),
                     ),
                   ),
                 )
