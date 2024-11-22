@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_admin_panel/common/widgets/images/t_rounded_image.dart';
-import 'package:flutter_ecommerce_admin_panel/utils/constants/enums.dart';
-import 'package:flutter_ecommerce_admin_panel/utils/constants/image_strings.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../../modules/authentication/personalization/presenter/controllers/user_controller.dart';
 import '../../../../utils/constants/colors.dart';
+import '../../../../utils/constants/enums.dart';
+import '../../../../utils/constants/image_strings.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/constants/text_strings.dart';
 import '../../../../utils/device/device_utility.dart';
+import '../../images/t_rounded_image.dart';
+import '../../shimmers/shimmer.dart';
 
 class THeader extends StatelessWidget implements PreferredSizeWidget {
   const THeader({super.key, this.scaffoldKey});
@@ -17,6 +20,8 @@ class THeader extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = UserController.instance;
+
     return Container(
       decoration: BoxDecoration(
         color: TColors.white,
@@ -48,30 +53,38 @@ class THeader extends StatelessWidget implements PreferredSizeWidget {
           Row(
             children: [
               /// User Image
-              TRoundedImage(
-                width: 40,
-                height: 40,
-                padding: 2,
-                imageType: ImageType.asset,
-                image: TImages.user,
+              Obx(
+                () {
+                  final networkImage = controller.userModel.value.profilePicture;
+                  return TRoundedImage(
+                    width: 40,
+                    height: 40,
+                    padding: 2,
+                    imageType: networkImage.isNotEmpty ? ImageType.network : ImageType.asset,
+                    image: networkImage.isNotEmpty ? networkImage : TImages.user,
+                  );
+                },
               ),
               const SizedBox(width: TSizes.sm / 2),
 
               /// Name & Email
               if ((!TDeviceUtils.isMobileScreen(context)))
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Coding with Drogbut',
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    Text(
-                      TTexts.adminEmail,
-                      style: Theme.of(context).textTheme.labelMedium,
-                    ),
-                  ],
+                Obx(
+                  () {
+                    final user = controller.userModel.value;
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        controller.isProfileLoading.value
+                            ? TShimmerEffect(width: 50, height: 13)
+                            : Text(user.fullName, style: Theme.of(context).textTheme.titleLarge),
+                        controller.isProfileLoading.value
+                            ? TShimmerEffect(width: 50, height: 13)
+                            : Text(user.email, style: Theme.of(context).textTheme.labelMedium),
+                      ],
+                    );
+                  },
                 ),
             ],
           )
@@ -81,6 +94,5 @@ class THeader extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  // TODO: implement preferredSize
   Size get preferredSize => Size.fromHeight(TSizes.appBarHeight + 15);
 }

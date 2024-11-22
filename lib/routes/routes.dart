@@ -12,7 +12,6 @@ class TRoutes {
   /// Default list of menu items
   static List<MenuItem> defaultMenuItems() {
     return [
-      MenuItem(route: login, icon: Icons.login, itemName: 'Login'),
       MenuItem(route: dashboard, icon: Icons.home, itemName: 'Dashboard'),
       MenuItem(route: media, icon: Icons.newspaper, itemName: 'Media'),
       MenuItem(route: '/banners', icon: Icons.settings, itemName: 'Banners'),
@@ -32,6 +31,7 @@ class TRoutes {
       MenuItem(route: '/notifications', icon: Icons.notifications, itemName: 'Notifications'),
       MenuItem(route: '/help', icon: Icons.help, itemName: 'Help'),
       MenuItem(route: '/about', icon: Icons.info, itemName: 'About'),
+      MenuItem(route: login, icon: Icons.logout, itemName: 'Logout'),
     ];
   }
 }

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../utils/popups/loaders.dart';
@@ -12,24 +11,24 @@ class UserController extends GetxController {
 
   ///================ Variables ===========================================
   Rx<UserModel> userModel = UserModel.empty().obs;
-  Rx<bool> isProfileLoaded = false.obs;
-  RxBool hidePassword = true.obs;
-  final verifyEmail = TextEditingController();
-  final verifyPassword = TextEditingController();
-  GlobalKey<FormState> reAuthFormKey = GlobalKey<FormState>();
+  Rx<bool> isProfileLoading = false.obs;
 
   @override
   void onInit() {
-    super.onInit();
     fetchUserDetails();
+    super.onInit();
   }
 
   /// Fetch user data
   Future<UserModel> fetchUserDetails() async {
     try {
+      isProfileLoading.value = true;
       final user = await userRepository.fetchAdminDetails();
+      userModel.value = user;
+      isProfileLoading.value = false;
       return user;
     } catch (e) {
+      isProfileLoading.value = false;
       TLoaders.errorSnackBar(title: 'Something is wrong...', message: e.toString());
       return UserModel.empty();
     }

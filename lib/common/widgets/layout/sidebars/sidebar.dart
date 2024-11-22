@@ -17,6 +17,7 @@ class TSidebar extends StatelessWidget {
       shape: BeveledRectangleBorder(side: BorderSide(color: TColors.grey, width: 1)),
       elevation: 0.0,
       child: Container(
+        padding: EdgeInsets.only(bottom: TSizes.defaultSpace),
         decoration: BoxDecoration(
           color: TColors.white,
           border: Border(right: BorderSide(color: Colors.grey, width: 1)),

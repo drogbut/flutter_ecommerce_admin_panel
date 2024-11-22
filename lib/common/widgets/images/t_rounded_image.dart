@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+
 import '../../../utils/constants/enums.dart';
 import '../../../utils/constants/sizes.dart';
 import '../shimmers/shimmer.dart';
@@ -46,7 +47,8 @@ class TRoundedImage extends StatelessWidget {
       height: height,
       margin: margin != null ? EdgeInsets.all(margin!) : null,
       padding: EdgeInsets.all(padding),
-      decoration: BoxDecoration(border: border, color: backgroundColor, borderRadius: BorderRadius.circular(borderRadius)),
+      decoration:
+          BoxDecoration(border: border, color: backgroundColor, borderRadius: BorderRadius.circular(borderRadius)),
       child: _buildImageWidget(),
     );
   }
@@ -84,7 +86,10 @@ class TRoundedImage extends StatelessWidget {
         fit: fit,
         color: overlayColor,
         imageUrl: image!,
-        errorWidget: (context, url, error) => const Icon(Icons.error),
+        errorWidget: (context, url, error) {
+          print("Error loading image : $error");
+          return const Icon(Icons.error);
+        },
         progressIndicatorBuilder: (context, url, downloadProgress) => TShimmerEffect(width: width, height: height),
       );
     } else {
