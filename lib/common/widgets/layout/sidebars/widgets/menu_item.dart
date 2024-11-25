@@ -9,15 +9,22 @@ class TMenuItem extends StatelessWidget {
   final String route;
   final IconData icon;
   final String itemName;
+  final VoidCallback? onTap;
 
-  const TMenuItem({super.key, required this.itemName, required this.route, required this.icon});
+  const TMenuItem({
+    super.key,
+    required this.itemName,
+    required this.route,
+    required this.icon,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SidebarController());
 
     return InkWell(
-      onTap: () => controller.menuOnTap(route),
+      onTap: onTap ?? () => controller.menuOnTap(route),
       onHover: (hovering) => hovering ? controller.changeHoverItem(route) : controller.changeHoverItem(''),
       child: Obx(
         () => Padding(

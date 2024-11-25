@@ -16,12 +16,12 @@ class ForgetPasswordHeader extends StatelessWidget {
       children: [
         /// Header
         IconButton(onPressed: () => Get.back(), icon: Icon(Iconsax.arrow_left, color: context.whiteOrBlack)),
-        const SizedBox(height: TSizes.spaceBtwSections),
+        const SizedBox(height: TSizes.spaceBtwItems),
 
         /// Title & Sub-title
         Text(TTexts.forgetPasswordTitle, style: context.textTheme.headlineSmall),
-        const SizedBox(height: TSizes.sm),
-        Text(TTexts.forgetPasswordSubTitle),
+        const SizedBox(height: TSizes.spaceBtwItems),
+        Text(TTexts.forgetPasswordSubTitle, style: context.textTheme.labelMedium),
       ],
     );
   }

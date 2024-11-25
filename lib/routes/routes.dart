@@ -31,7 +31,7 @@ class TRoutes {
       MenuItem(route: '/notifications', icon: Icons.notifications, itemName: 'Notifications'),
       MenuItem(route: '/help', icon: Icons.help, itemName: 'Help'),
       MenuItem(route: '/about', icon: Icons.info, itemName: 'About'),
-      MenuItem(route: login, icon: Icons.logout, itemName: 'Logout'),
+      MenuItem(route: login, icon: Icons.logout, itemName: 'Logout')
     ];
   }
 }

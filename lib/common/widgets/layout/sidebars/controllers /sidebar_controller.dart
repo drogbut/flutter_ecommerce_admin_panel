@@ -1,10 +1,11 @@
+import 'package:flutter_ecommerce_admin_panel/modules/authentication/login/data/auth_repository.dart';
 import 'package:get/get.dart';
 
 import '../../../../../routes/routes.dart';
 import '../../../../../utils/device/device_utility.dart';
 
 class SidebarController extends GetxController {
-  final activeItem = TRoutes.login.obs;
+  final activeItem = TRoutes.dashboard.obs;
   final hoverItem = ''.obs;
 
   /// Change the active item to the selected route
@@ -22,8 +23,10 @@ class SidebarController extends GetxController {
   bool isHovering(String itemName) => hoverItem.value == itemName;
 
   /// Action to take when a menu item is tapped
-  void menuOnTap(String route) {
-    if (!isActive(route)) {
+  void menuOnTap(String route) async {
+    if (route == TRoutes.login) {
+      await AuthenticationRepository.instance.logout();
+    } else if (!isActive(route)) {
       changeActiveItem(route);
       if (TDeviceUtils.isMobileScreen(Get.context!)) Get.back();
 

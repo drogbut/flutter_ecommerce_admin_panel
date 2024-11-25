@@ -33,7 +33,10 @@ class ForgetPasswordForm extends StatelessWidget {
           /// Submitted button
           TPrimaryButton(
             title: TTexts.submit,
-            onPressed: () => Get.toNamed(TRoutes.resetPassword),
+            onPressed: () => Get.toNamed(
+              TRoutes.resetPassword,
+              arguments: controller.email.text,
+            ),
           ),
           const SizedBox(height: TSizes.spaceBtwItems),
         ],
