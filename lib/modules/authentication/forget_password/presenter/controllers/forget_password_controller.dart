@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_admin_panel/routes/routes.dart';
 import 'package:get/get.dart';
+
+import '../../../../../utils/constants/image_strings.dart';
+import '../../../../../utils/helpers/network_manager.dart';
+import '../../../../../utils/popups/full_screen_loader.dart';
+import '../../../../../utils/popups/loaders.dart';
+import '../../../login/data/auth_repository.dart';
 
 class ForgetPasswordController extends GetxController {
   /// controller needs instance & repository
   static ForgetPasswordController get instance => Get.find();
-  //final authRepository = AuthenticationRepository.instance;
+  final authRepository = AuthenticationRepository.instance;
 
   ///================ variables ========================================
   final email = TextEditingController();
@@ -12,9 +19,9 @@ class ForgetPasswordController extends GetxController {
 
   ///==== Send Reset Password Email ====================================
   Future<void> sendPasswordResetEmail() async {
-    /*try {
+    try {
       /// Start loading
-      TFullScreenLoader.openLoadingDialog('Processing your request...', TImages.deliveredInPlaneIllustration);
+      TFullScreenLoader.openLoadingDialog('Processing your request...', TImages.docerAnimation);
 
       /// Check internet connectivity
       final isConnected = await NetworkManager.instance.isConnected();
@@ -36,19 +43,19 @@ class ForgetPasswordController extends GetxController {
       TFullScreenLoader.stopLoading();
 
       /// Show success screen
-      TLoaders.successSnackbar(title: 'Email send', message: 'Email link send to reset you password');
+      TLoaders.successSnackBar(title: 'Email send', message: 'Email link send to reset you password');
 
       /// Redirect
-      Get.offAll(() => ResetPasswordScreen(email: email.text.trim()));
+      Get.offAllNamed(TRoutes.login);
     } catch (e) {
       TFullScreenLoader.stopLoading();
-      TLoaders.errorSnackbar(title: 'Oh error', message: e.toString());
-    }*/
+      TLoaders.errorSnackBar(title: 'Oh error', message: e.toString());
+    }
   }
 
   ///================ Reset Email ====================================
   Future<void> resentPassword({required String email}) async {
-    /*try {
+    try {
       /// Start loading
       TFullScreenLoader.openLoadingDialog('Processing your request...', TImages.deliveredInPlaneIllustration);
 
@@ -66,10 +73,10 @@ class ForgetPasswordController extends GetxController {
       TFullScreenLoader.stopLoading();
 
       /// Show success screen
-      TLoaders.successSnackbar(title: 'Email send', message: 'Email link send to reset your password');
+      TLoaders.successSnackBar(title: 'Email send', message: 'Email link send to reset your password');
     } catch (e) {
       TFullScreenLoader.stopLoading();
-      TLoaders.errorSnackbar(title: 'Oh error', message: e.toString());
-    }*/
+      TLoaders.errorSnackBar(title: 'Oh error', message: e.toString());
+    }
   }
 }

@@ -4,7 +4,6 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../../../../common/widgets/buttons/primary.dart';
 import '../../../../../../common/widgets/text_fields/primary.dart';
-import '../../../../../../routes/routes.dart';
 import '../../../../../../utils/constants/sizes.dart';
 import '../../../../../../utils/constants/text_strings.dart';
 import '../../../../../../utils/validators/validation.dart';
@@ -33,7 +32,7 @@ class ForgetPasswordForm extends StatelessWidget {
           /// Submitted button
           TPrimaryButton(
             title: TTexts.submit,
-            onPressed: () => Get.toNamed(TRoutes.resetPassword),
+            onPressed: () => controller.sendPasswordResetEmail(),
           ),
           const SizedBox(height: TSizes.spaceBtwItems),
         ],
