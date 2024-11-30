@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_admin_panel/utils/constants/sizes.dart';
+import 'package:get/get.dart';
+
+import '../table/data_table.dart';
 
 class DashboardScreenMobile extends StatelessWidget {
   const DashboardScreenMobile({super.key});
@@ -12,14 +15,11 @@ class DashboardScreenMobile extends StatelessWidget {
           padding: const EdgeInsets.all(TSizes.defaultSpace),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
             children: [
-              /// Header - logo, title and sub-title
-              //const LoginHeader(),
+              /// Orders
+              Text('Recent orders', style: context.textTheme.headlineSmall),
               const SizedBox(height: TSizes.spaceBtwSections),
-
-              /// Form
-              //const LoginForm(),
+              const DashboardOrderTable(),
               const SizedBox(height: TSizes.spaceBtwSections),
             ],
           ),
