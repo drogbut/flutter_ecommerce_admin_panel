@@ -18,7 +18,7 @@ class TabletLayout extends StatelessWidget {
       key: scaffoldKey,
       drawer: TSidebar(),
       appBar: THeader(scaffoldKey: scaffoldKey),
-      body: body ?? Center(child: Text('tablet body')),
+      body: Expanded(child: body ?? Center(child: Text('tablet body'))),
     );
   }
 }

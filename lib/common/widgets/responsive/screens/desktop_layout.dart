@@ -26,7 +26,7 @@ class DesktopLayout extends StatelessWidget {
                   THeader(),
 
                   /// BODY
-                  body ?? Center(child: Text('desktop body')),
+                  Expanded(child: body ?? Center(child: Text('desktop body'))),
                 ],
               )),
         ],
