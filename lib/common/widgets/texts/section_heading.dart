@@ -21,7 +21,7 @@ class TSectionHeading extends StatelessWidget {
             style: Theme.of(context).textTheme.headlineSmall!.apply(color: textColor),
             maxLines: 1,
             overflow: TextOverflow.ellipsis),
-        if (rightSideWidget!= null) rightSideWidget!
+        if (rightSideWidget != null) rightSideWidget!
       ],
     );
   }

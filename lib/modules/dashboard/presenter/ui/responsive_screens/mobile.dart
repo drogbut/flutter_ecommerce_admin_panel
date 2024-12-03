@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_admin_panel/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 
+import '../../../../../utils/constants/sizes.dart';
 import '../table/data_table.dart';
+import '../widgets/dashboard_card.dart';
 
 class DashboardScreenMobile extends StatelessWidget {
   const DashboardScreenMobile({super.key});
@@ -16,9 +17,21 @@ class DashboardScreenMobile extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              /// Dashboard
+              Text('Dashboard', style: context.textTheme.headlineSmall),
+              const SizedBox(height: TSizes.spaceBtwItems),
+              DashboardCard(title: 'Sales Total', subtitle: '\$365.5', stats: '25'),
+              const SizedBox(height: TSizes.spaceBtwItems),
+              DashboardCard(title: 'Sales Total', subtitle: '\$365.5', stats: '25'),
+              const SizedBox(height: TSizes.spaceBtwItems),
+              DashboardCard(title: 'Sales Total', subtitle: '\$365.5', stats: '25'),
+              const SizedBox(height: TSizes.spaceBtwItems),
+              DashboardCard(title: 'Sales Total', subtitle: '\$365.5', stats: '25'),
+              const SizedBox(height: TSizes.spaceBtwSections),
+
               /// Orders
               Text('Recent orders', style: context.textTheme.headlineSmall),
-              const SizedBox(height: TSizes.spaceBtwSections),
+              const SizedBox(height: TSizes.spaceBtwItems),
               const DashboardOrderTable(),
               const SizedBox(height: TSizes.spaceBtwSections),
             ],
