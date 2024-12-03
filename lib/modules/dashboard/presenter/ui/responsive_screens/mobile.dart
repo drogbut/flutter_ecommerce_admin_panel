@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../../../utils/constants/sizes.dart';
 import '../table/data_table.dart';
+import '../widgets/bar_graph_chart.dart';
 import '../widgets/dashboard_card.dart';
 
 class DashboardScreenMobile extends StatelessWidget {
@@ -27,6 +28,10 @@ class DashboardScreenMobile extends StatelessWidget {
               DashboardCard(title: 'Sales Total', subtitle: '\$365.5', stats: '25'),
               const SizedBox(height: TSizes.spaceBtwItems),
               DashboardCard(title: 'Sales Total', subtitle: '\$365.5', stats: '25'),
+              const SizedBox(height: TSizes.spaceBtwSections),
+
+              /// Bar Graph
+              BarGraphChart(),
               const SizedBox(height: TSizes.spaceBtwSections),
 
               /// Orders
