@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../../../../common/styles/spacing_styles.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../table/data_table.dart';
+import '../widgets/bar_graph_chart.dart';
 import '../widgets/dashboard_card.dart';
 
 class DashboardScreenTablet extends StatelessWidget {
@@ -36,6 +37,10 @@ class DashboardScreenTablet extends StatelessWidget {
                 Expanded(child: DashboardCard(title: 'Sales Total', subtitle: '\$365.5', stats: '25')),
               ],
             ),
+            const SizedBox(height: TSizes.spaceBtwSections),
+
+            /// Bar Graph
+            BarGraphChart(),
             const SizedBox(height: TSizes.spaceBtwSections),
 
             /// Orders
