@@ -5,6 +5,7 @@ import '../../../../../utils/constants/sizes.dart';
 import '../table/data_table.dart';
 import '../widgets/bar_graph_chart.dart';
 import '../widgets/dashboard_card.dart';
+import '../widgets/status_pie_chart.dart';
 
 class DashboardScreenMobile extends StatelessWidget {
   const DashboardScreenMobile({super.key});
@@ -35,9 +36,12 @@ class DashboardScreenMobile extends StatelessWidget {
               const SizedBox(height: TSizes.spaceBtwSections),
 
               /// Orders
-              Text('Recent orders', style: context.textTheme.headlineSmall),
-              const SizedBox(height: TSizes.spaceBtwItems),
+
               const DashboardOrderTable(),
+              const SizedBox(height: TSizes.spaceBtwSections),
+
+              /// Pie Graph
+              OrderStatusPieChart(),
               const SizedBox(height: TSizes.spaceBtwSections),
             ],
           ),
