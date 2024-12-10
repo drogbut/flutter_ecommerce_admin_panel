@@ -1,8 +1,8 @@
-import 'package:flutter_ecommerce_admin_panel/utils/constants/enums.dart';
-import 'package:flutter_ecommerce_admin_panel/utils/helpers/helper_functions.dart';
 import 'package:get/get.dart';
 
 import '../../../../common/models/order.dart';
+import '../../../../utils/constants/enums.dart';
+import '../../../../utils/helpers/helper_functions.dart';
 
 class DashboardController extends GetxController {
   static DashboardController get instance => Get.find();
@@ -54,10 +54,11 @@ class DashboardController extends GetxController {
   @override
   void onInit() {
     _calculatedWeeklySales();
+    _calculatedOrderStatusData();
     super.onInit();
   }
 
-  /// calculated weekly sales
+  /// Call this function to calculate weekly sales
   void _calculatedWeeklySales() {
     // Reset weeklySales to zero
     weeklySales.value = List<double>.filled(7, 0.0);
@@ -78,6 +79,42 @@ class DashboardController extends GetxController {
         // Updates the observed variable.
         weeklySales[index] += order.totalAmount;
       }
+    }
+  }
+
+  /// Call this function to calculate order status counts
+  void _calculatedOrderStatusData() {
+    // Reset status data
+    orderStatusData.clear();
+
+    // Map to store total amounts for each status
+    totalAmounts.value = {for (var status in OrderStatus.values) status: 0.0};
+
+    for (var order in orders) {
+      // Count Orders
+      final status = order.status;
+      orderStatusData[status] = (orderStatusData[status] ?? 0) + 1;
+
+      // Calculate total amount for each status
+      totalAmounts[status] = (totalAmounts[status] ?? 0) + order.totalAmount;
+    }
+  }
+
+  ///
+  String getDisplayStatusName(OrderStatus status) {
+    switch (status) {
+      case OrderStatus.pending:
+        return 'Pending';
+      case OrderStatus.shipped:
+        return 'Shipped';
+      case OrderStatus.delivered:
+        return 'Delivered';
+      case OrderStatus.processing:
+        return 'Processing';
+      case OrderStatus.cancelled:
+        return 'Cancelled';
+      default:
+        return 'unknown';
     }
   }
 }
