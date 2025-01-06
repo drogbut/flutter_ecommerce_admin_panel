@@ -4,6 +4,7 @@ import '../modules/authentication/forget_password/presenter/ui/forget_password.d
 import '../modules/authentication/login/presenter/ui/login.dart';
 import '../modules/authentication/reset_password/presenter/ui/reset_password.dart';
 import '../modules/dashboard/presenter/ui/dashboard_screen.dart';
+import '../modules/media/presenter/ui/media_screen.dart';
 import 'route_middleware.dart';
 import 'routes.dart';
 
@@ -14,5 +15,6 @@ class TAppRoute {
     GetPage(name: TRoutes.resetPassword, page: () => ResetPasswordScreen()),
     GetPage(name: TRoutes.resetPassword, page: () => ResetPasswordScreen()),
     GetPage(name: TRoutes.dashboard, page: () => DashboardScreen(), middlewares: [RouteMiddleWare()]),
+    GetPage(name: TRoutes.media, page: () => MediaScreen(), middlewares: [RouteMiddleWare()]),
   ];
 }
