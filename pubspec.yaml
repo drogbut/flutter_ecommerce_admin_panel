@@ -11,26 +11,26 @@ dependencies:
     sdk: flutter
 
   # Utility Packages
-  intl: ^0.19.0
-  lottie: ^3.1.3
+  intl: ^0.20.1
+  lottie: ^3.3.0
   shimmer: ^3.0.0
   clipboard: ^0.1.3
   image_picker: ^1.1.2
   url_launcher: ^6.3.1
-  flutter_dropzone: ^4.2.0
+  flutter_dropzone: ^4.2.1
   flutter_typeahead: ^5.2.0
-  connectivity_plus: ^6.1.0
+  connectivity_plus: ^6.1.1
   multi_select_flutter: ^4.1.3
   cached_network_image: ^3.4.1
-  flutter_native_splash: ^2.4.2
+  flutter_native_splash: ^2.4.4
   smooth_page_indicator: ^1.2.0+3
 
   # Web Specific
   web: ^1.1.0
   http: ^1.2.2
   html: ^0.15.5
-  fl_chart: ^0.69.0
-  data_table_2: ^2.5.15
+  fl_chart: ^0.70.1
+  data_table_2: ^2.5.18
   url_strategy: ^0.3.0
   universal_html: ^2.2.4
 
@@ -43,10 +43,10 @@ dependencies:
   get_storage: ^2.1.1
 
   # Firebase
-  firebase_core: ^3.7.0
-  firebase_auth: ^5.3.2
-  cloud_firestore: ^5.4.5
-  firebase_storage: ^12.3.5
+  firebase_core: ^3.10.0
+  firebase_auth: ^5.4.0
+  cloud_firestore: ^5.6.1
+  firebase_storage: ^12.4.0
 
   # Others...
   freezed_annotation: ^2.4.4
@@ -58,9 +58,9 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^5.0.0
-  build_runner: ^2.4.13
-  freezed: ^2.5.7
-  json_serializable: ^6.8.0
+  build_runner: ^2.4.14
+  freezed: ^2.5.8
+  json_serializable: ^6.9.2
 
 
 flutter:

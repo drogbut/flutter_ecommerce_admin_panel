@@ -47,8 +47,11 @@ class TRoundedImage extends StatelessWidget {
       height: height,
       margin: margin != null ? EdgeInsets.all(margin!) : null,
       padding: EdgeInsets.all(padding),
-      decoration:
-          BoxDecoration(border: border, color: backgroundColor, borderRadius: BorderRadius.circular(borderRadius)),
+      decoration: BoxDecoration(
+        border: border,
+        color: backgroundColor,
+        borderRadius: BorderRadius.circular(borderRadius),
+      ),
       child: _buildImageWidget(),
     );
   }
