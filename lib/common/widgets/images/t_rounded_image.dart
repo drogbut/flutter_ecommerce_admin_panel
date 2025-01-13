@@ -86,10 +86,7 @@ class TRoundedImage extends StatelessWidget {
         fit: fit,
         color: overlayColor,
         imageUrl: image!,
-        errorWidget: (context, url, error) {
-          print("Error loading image : $error");
-          return const Icon(Icons.error);
-        },
+        errorWidget: (context, url, error) => const Icon(Icons.error),
         progressIndicatorBuilder: (context, url, downloadProgress) => TShimmerEffect(width: width, height: height),
       );
     } else {

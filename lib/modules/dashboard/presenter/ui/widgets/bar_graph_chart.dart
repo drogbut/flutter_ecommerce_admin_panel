@@ -82,7 +82,20 @@ class BarGraphChart extends StatelessWidget {
             // get the day corresponding to the calculated index
             final day = days[index];
 
-            return SideTitleWidget(axisSide: AxisSide.bottom, space: 0, child: Text(day));
+            return SideTitleWidget(
+                meta: TitleMeta(
+                  min: 1,
+                  max: 1,
+                  parentAxisSize: 20,
+                  axisPosition: 0,
+                  appliedInterval: 0,
+                  sideTitles: SideTitles(),
+                  formattedValue: '',
+                  axisSide: AxisSide.bottom,
+                  rotationQuarterTurns: 4,
+                ),
+                space: 4,
+                child: Text(day));
           },
         ),
       ),

@@ -41,9 +41,12 @@ class THeader extends StatelessWidget implements PreferredSizeWidget {
             ? SizedBox(
                 width: 400,
                 child: TextFormField(
-                  decoration:
-                      InputDecoration(prefixIcon: Icon(Iconsax.search_normal), hintText: TTexts.homeAppbarSearchText),
-                ))
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Iconsax.search_normal),
+                    hintText: TTexts.homeAppbarSearchText,
+                  ),
+                ),
+              )
             : null,
 
         /// Actions
@@ -53,18 +56,14 @@ class THeader extends StatelessWidget implements PreferredSizeWidget {
           Row(
             children: [
               /// User Image
-              Obx(
-                () {
-                  final networkImage = controller.userModel.value.profilePicture;
-                  return TRoundedImage(
-                    width: 40,
-                    height: 40,
-                    padding: 2,
-                    imageType: networkImage.isNotEmpty ? ImageType.network : ImageType.asset,
-                    image: networkImage.isNotEmpty ? networkImage : TImages.user,
-                  );
-                },
+              TRoundedImage(
+                width: 40,
+                height: 40,
+                padding: 2,
+                imageType: ImageType.asset,
+                image: TImages.user,
               ),
+
               const SizedBox(width: TSizes.sm / 2),
 
               /// Name & Email
