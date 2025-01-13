@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_admin_panel/common/styles/spacing_styles.dart';
-import 'package:flutter_ecommerce_admin_panel/utils/constants/colors.dart';
-import 'package:flutter_ecommerce_admin_panel/utils/constants/sizes.dart';
 
+import '../../../../../../common/styles/spacing_styles.dart';
+import '../../../../../../utils/constants/colors.dart';
+import '../../../../../../utils/constants/sizes.dart';
 import '../widgets/header.dart';
 import '../widgets/login_form.dart';
 

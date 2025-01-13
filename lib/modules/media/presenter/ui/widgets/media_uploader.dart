@@ -1,36 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:flutter_ecommerce_admin_panel/modules/media/presenter/ui/widgets/drag_and_drop.dart';
+import 'package:flutter_ecommerce_admin_panel/modules/media/presenter/ui/widgets/local_selected_images.dart';
+import 'package:flutter_ecommerce_admin_panel/modules/media/presenter/ui/widgets/media_content.dart';
+import 'package:get/get.dart';
 
-import '../../../../../common/widgets/breadcrumbs/breadcrumbs_with_heading.dart';
 import '../../../../../utils/constants/sizes.dart';
+import '../../controllers/media_controller.dart';
 
-class HeaderMedia extends StatelessWidget {
-  const HeaderMedia({super.key});
+class MediaUploader extends StatelessWidget {
+  const MediaUploader({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        /// Breadcrumbs
-        TBreadcrumbsWithHeading(
-          heading: 'Media',
-          breadcrumbItems: [],
-        ),
+    final controller = MediaController.instance;
 
-        /// upload button
-        ElevatedButton.icon(
-          style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(
-            horizontal: TSizes.md,
-            vertical: TSizes.sm,
-          )),
-          onPressed: () {},
-          label: Text('Upload images'),
-          icon: Icon(Iconsax.cloud_add),
-        ),
-      ],
+    return Obx(
+      () => controller.showImageUploaderSection.value
+          ? Column(
+              spacing: TSizes.spaceBtwSections,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                /// Drag and drop Area
+                DragAndDropArea(),
+
+                /// locally selected images
+                LocalSelectedImagesArea(),
+              ],
+            )
+          : MediaContent(),
     );
   }
 }
