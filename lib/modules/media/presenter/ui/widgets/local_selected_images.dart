@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_admin_panel/common/widgets/buttons/primary.dart';
+import 'package:flutter_ecommerce_admin_panel/common/widgets/buttons/tertiary.dart';
+import 'package:flutter_ecommerce_admin_panel/modules/media/presenter/ui/widgets/media_folder_dropdown.dart';
+import 'package:flutter_ecommerce_admin_panel/utils/device/device_utility.dart';
 import 'package:get/get.dart';
 
-import '../../../../../common/widgets/buttons/primary.dart';
-import '../../../../../common/widgets/buttons/tertiary.dart';
 import '../../../../../common/widgets/containers/rounded_container.dart';
 import '../../../../../common/widgets/images/t_rounded_image.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/enums.dart';
 import '../../../../../utils/constants/image_strings.dart';
 import '../../../../../utils/constants/sizes.dart';
-import '../../../../../utils/device/device_utility.dart';
 import '../../controllers/media_controller.dart';
-import 'media_folder_dropdown.dart';
 
 class LocalSelectedImagesArea extends StatelessWidget {
   const LocalSelectedImagesArea({super.key});
@@ -21,17 +21,11 @@ class LocalSelectedImagesArea extends StatelessWidget {
     final controller = MediaController.instance;
 
     return TRoundedContainer(
-      width: double.infinity,
-      height: 250,
-      showBorder: true,
-      borderColor: TColors.borderPrimary,
-      backgroundColor: TColors.primaryBackground,
-      padding: EdgeInsets.all(TSizes.defaultSpace),
       child: Column(
         spacing: TSizes.spaceBtwItems,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          /// Selected folders header
+          /// Media images header
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -65,17 +59,13 @@ class LocalSelectedImagesArea extends StatelessWidget {
 
                   /// Upload Button
                   if (!TDeviceUtils.isMobileScreen(context))
-                    TPrimaryButton(
-                      padding: EdgeInsets.all(TSizes.md),
-                      title: 'Upload',
-                      onPressed: () {},
-                    ),
+                    SizedBox(width: TSizes.buttonWidth, child: TPrimaryButton(title: 'Upload', onPressed: () {})),
                 ],
               ),
             ],
           ),
 
-          /// Images
+          /// Show Media
           Wrap(
             spacing: TSizes.spaceBtwItems / 2,
             runSpacing: TSizes.spaceBtwItems / 2,
@@ -86,6 +76,9 @@ class LocalSelectedImagesArea extends StatelessWidget {
                 backgroundColor: TColors.primaryBackground,
                 imageType: ImageType.asset,
                 image: TImages.darkAppLogo,
+                //borderRadius: 10,
+                border: Border.all(color: TColors.primaryBackground, width: 2),
+                padding: 0,
               ),
               TRoundedImage(
                 width: 90,
@@ -93,6 +86,9 @@ class LocalSelectedImagesArea extends StatelessWidget {
                 backgroundColor: TColors.primaryBackground,
                 imageType: ImageType.asset,
                 image: TImages.darkAppLogo,
+                //borderRadius: 10,
+                border: Border.all(color: TColors.primaryBackground, width: 2),
+                padding: 0,
               ),
               TRoundedImage(
                 width: 90,
@@ -100,6 +96,9 @@ class LocalSelectedImagesArea extends StatelessWidget {
                 backgroundColor: TColors.primaryBackground,
                 imageType: ImageType.asset,
                 image: TImages.darkAppLogo,
+                //borderRadius: 10,
+                border: Border.all(color: TColors.primaryBackground, width: 2),
+                padding: 0,
               ),
               TRoundedImage(
                 width: 90,
@@ -107,6 +106,9 @@ class LocalSelectedImagesArea extends StatelessWidget {
                 backgroundColor: TColors.primaryBackground,
                 imageType: ImageType.asset,
                 image: TImages.darkAppLogo,
+                //borderRadius: 10,
+                border: Border.all(color: TColors.primaryBackground, width: 2),
+                padding: 0,
               ),
               TRoundedImage(
                 width: 90,
@@ -114,6 +116,9 @@ class LocalSelectedImagesArea extends StatelessWidget {
                 backgroundColor: TColors.primaryBackground,
                 imageType: ImageType.asset,
                 image: TImages.darkAppLogo,
+                //borderRadius: 10,
+                border: Border.all(color: TColors.primaryBackground, width: 2),
+                padding: 0,
               ),
               TRoundedImage(
                 width: 90,
@@ -121,12 +126,30 @@ class LocalSelectedImagesArea extends StatelessWidget {
                 backgroundColor: TColors.primaryBackground,
                 imageType: ImageType.asset,
                 image: TImages.darkAppLogo,
+                //borderRadius: 10,
+                border: Border.all(color: TColors.primaryBackground, width: 2),
+                padding: 0,
+              ),
+              TRoundedImage(
+                width: 90,
+                height: 90,
+                backgroundColor: TColors.primaryBackground,
+                imageType: ImageType.asset,
+                image: TImages.darkAppLogo,
+                //borderRadius: 10,
+                border: Border.all(color: TColors.primaryBackground, width: 2),
+                padding: 0,
               ),
             ],
           ),
 
-          /// Upload Button
-          if (TDeviceUtils.isMobileScreen(context)) TPrimaryButton(title: 'Upload', onPressed: () {}),
+          /// Mobile button
+          if (TDeviceUtils.isMobileScreen(context))
+            TPrimaryButton(
+              //width: double.infinity,
+              title: 'Upload',
+              onPressed: () {},
+            )
         ],
       ),
     );

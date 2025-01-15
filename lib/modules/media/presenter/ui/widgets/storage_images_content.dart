@@ -11,8 +11,8 @@ import '../../../../../utils/constants/image_strings.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../controllers/media_controller.dart';
 
-class DisplayDragAndDropContent extends StatelessWidget {
-  const DisplayDragAndDropContent({super.key});
+class StorageImagesArea extends StatelessWidget {
+  const StorageImagesArea({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -119,21 +119,18 @@ class DisplayDragAndDropContent extends StatelessWidget {
           ),
 
           /// Load More Button
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: TSizes.spaceBtwSections),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: TSizes.buttonWidth,
-                  child: ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(padding: EdgeInsets.all(TSizes.md)),
-                    onPressed: () {},
-                    label: Text('Load More'),
-                    icon: Icon(Iconsax.arrow_down),
-                  ),
-                ),
-              ],
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(vertical: TSizes.sm),
+                minimumSize: Size.fromHeight(50),
+              ),
+              onPressed: () {},
+              label: Text(
+                'Load More',
+              ),
+              icon: Icon(Iconsax.arrow_down),
             ),
           ),
         ],

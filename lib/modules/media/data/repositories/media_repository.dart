@@ -1,53 +1,72 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../../../../utils/exceptions/firebase_exceptions.dart';
-import '../../../../../utils/exceptions/format_exceptions.dart';
-import '../../../../../utils/exceptions/platform_exceptions.dart';
-import '../../../login/data/auth_repository.dart';
-import '../models/user.dart';
+import '../model/image.dart';
 
-class UserRepository extends GetxController {
-  static UserRepository get instance => Get.find();
+class MediaRepository extends GetxController {
+  /// instance
+  static MediaRepository get instance => Get.find();
+  final _storage = FirebaseStorage.instance;
 
-  /// variables
-  final _db = FirebaseFirestore.instance;
-  final _authRepository = AuthenticationRepository.instance;
-
-  /// Function to save user data to FireStore.
-  Future<void> createUser({required UserModel user}) async {
+  /// Upload any Image using Uint8List (compatible with DropzoneFileInterface)
+  Future<ImageModel> uploadImageFileInStorage({
+    required Uint8List fileData,
+    required String mimeType,
+    required String path,
+    required String imageName,
+  }) async {
     try {
-      await _db.collection('Users').doc(user.id).set(user.toJson());
+      // Reference to the storage location
+      final Reference ref = _storage.ref('$path/$imageName');
+
+      // Upload file using Uint8List
+      final UploadTask uploadTask = ref.putData(fileData, SettableMetadata(contentType: mimeType));
+
+      // Wait for the upload to complete
+      final TaskSnapshot snapshot = await uploadTask.whenComplete(() => {});
+
+      // Get download URL
+      final String downloadURL = await snapshot.ref.getDownloadURL();
+
+      // Fetch metadata
+      final FullMetadata metadata = await ref.getMetadata();
+      return ImageModel.fromFirebaseMetadata(metadata, path, imageName, downloadURL);
     } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on FormatException catch (_) {
-      throw const TFormatException();
+      throw e.message!;
+    } on SocketException catch (e) {
+      throw e.message;
     } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
+      throw e.message!;
     } catch (e) {
-      throw 'Something went Wrong. Please try again';
+      throw e.toString();
     }
   }
 
-  /// Function to fetch user data base on user ID
-  Future<UserModel> fetchAdminDetails() async {
+  Future<String> uploadImageFileInDatabase(ImageModel image) async {
     try {
-      final documentSnapshot = await _db.collection('Users').doc(_authRepository.authUser?.uid).get();
+      // Reference to the FireStore collection
+      final collection = FirebaseFirestore.instance.collection('images');
 
-      if (documentSnapshot.exists) {
-        return UserModel.fromSnapshot(documentSnapshot);
-      } else {
-        return UserModel.empty();
-      }
+      // Convert the ImageModel object into a Map compatible with FireStore
+      final imageData = image.toJson();
+
+      // Add the image to the FireStore collection
+      final documentRef = await collection.add(imageData);
+
+      // Return the ID of the document added
+      return documentRef.id;
     } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on FormatException catch (_) {
-      throw const TFormatException();
+      throw e.message!;
+    } on SocketException catch (e) {
+      throw e.message;
     } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
+      throw e.message!;
     } catch (e) {
-      throw 'Something went wrong. Please try again.';
+      throw e.toString();
     }
   }
 }

@@ -28,16 +28,16 @@ class MediaScreenTablet extends StatelessWidget {
 
             Obx(() => controller.showImageUploaderSection.value
                 ? Column(
-              spacing: TSizes.spaceBtwSections,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                /// Drag and Drop
-                DragAndDropArea(),
+                    spacing: TSizes.spaceBtwSections,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      /// Drag and Drop
+                      DragAndDropArea(),
 
-                /// Local Section
-                LocalSelectedImagesArea(),
-              ],
-            )
+                      /// Local Section
+                      LocalSelectedImagesArea(),
+                    ],
+                  )
                 : SizedBox.shrink()),
 
             /// Storage Section
