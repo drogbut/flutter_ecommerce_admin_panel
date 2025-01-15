@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_admin_panel/common/widgets/buttons/primary.dart';
-import 'package:flutter_ecommerce_admin_panel/common/widgets/buttons/tertiary.dart';
 import 'package:flutter_ecommerce_admin_panel/modules/media/presenter/ui/widgets/media_folder_dropdown.dart';
-import 'package:flutter_ecommerce_admin_panel/utils/device/device_utility.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -14,8 +11,8 @@ import '../../../../../utils/constants/image_strings.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../controllers/media_controller.dart';
 
-class MediaContent extends StatelessWidget {
-  const MediaContent({super.key});
+class DisplayDragAndDropContent extends StatelessWidget {
+  const DisplayDragAndDropContent({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,40 +25,17 @@ class MediaContent extends StatelessWidget {
         children: [
           /// Media images header
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            spacing: TSizes.spaceBtwItems,
             children: [
-              /// Selected folder text
-              Row(
-                spacing: TSizes.spaceBtwItems,
-                children: [
-                  Text('Selected Folder', style: context.textTheme.headlineSmall),
+              Text('Selected Folder', style: context.textTheme.headlineSmall),
 
-                  /// Category DropDown menu
-                  MediaFolderDropDown(
-                    onChanged: (MediaCategory? value) {
-                      if (value != null) {
-                        controller.selectedPath.value = value;
-                      }
-                    },
-                  ),
-                ],
-              ),
-
-              /// Remove Button
-              Row(
-                spacing: TSizes.sm,
-                children: [
-                  SizedBox(
-                      width: TSizes.buttonWidth,
-                      child: TTertiaryButton(
-                        title: 'Remove All',
-                        onPressed: () {},
-                      )),
-
-                  /// Upload Button
-                  if (!TDeviceUtils.isMobileScreen(context))
-                    SizedBox(width: TSizes.buttonWidth, child: TPrimaryButton(title: 'Upload', onPressed: () {})),
-                ],
+              /// Category DropDown menu
+              MediaFolderDropDown(
+                onChanged: (MediaCategory? value) {
+                  if (value != null) {
+                    controller.selectedPath.value = value;
+                  }
+                },
               ),
             ],
           ),

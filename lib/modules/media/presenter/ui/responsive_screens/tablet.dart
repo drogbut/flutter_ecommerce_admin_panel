@@ -4,8 +4,10 @@ import 'package:get/get.dart';
 import '../../../../../common/styles/spacing_styles.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../controllers/media_controller.dart';
+import '../widgets/drag_and_drop.dart';
 import '../widgets/header_media.dart';
-import '../widgets/media_uploader.dart';
+import '../widgets/local_selected_images.dart';
+import '../widgets/storage_images_content.dart';
 
 class MediaScreenTablet extends StatelessWidget {
   const MediaScreenTablet({super.key});
@@ -21,11 +23,25 @@ class MediaScreenTablet extends StatelessWidget {
           spacing: TSizes.spaceBtwSections,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /// Header
+            /// Header section
             HeaderMedia(),
 
-            /// Drag and Drop area
-            MediaUploader(),
+            Obx(() => controller.showImageUploaderSection.value
+                ? Column(
+              spacing: TSizes.spaceBtwSections,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                /// Drag and Drop
+                DragAndDropArea(),
+
+                /// Local Section
+                LocalSelectedImagesArea(),
+              ],
+            )
+                : SizedBox.shrink()),
+
+            /// Storage Section
+            StorageImagesArea()
           ],
         ),
       ),
