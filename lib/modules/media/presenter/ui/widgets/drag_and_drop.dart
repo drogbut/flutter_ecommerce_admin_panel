@@ -77,7 +77,11 @@ class DragAndDropArea extends StatelessWidget {
           ),
 
           /// Button
-          SizedBox(child: OutlinedButton(onPressed: () {}, child: Text('Select Images'))),
+          SizedBox(
+              child: OutlinedButton(
+            child: Text('Select Images'),
+            onPressed: () => controller.selectLocalImages(),
+          )),
         ],
       ),
     );

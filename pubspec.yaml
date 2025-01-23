@@ -29,7 +29,7 @@ dependencies:
   web: ^1.1.0
   http: ^1.2.2
   html: ^0.15.5
-  fl_chart: ^0.70.1
+  fl_chart: ^0.70.2
   data_table_2: ^2.5.18
   url_strategy: ^0.3.0
   universal_html: ^2.2.4
@@ -51,6 +51,7 @@ dependencies:
   # Others...
   freezed_annotation: ^2.4.4
   json_annotation: ^4.9.0
+  webview_flutter: ^4.10.0
 
 
 dev_dependencies:

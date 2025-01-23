@@ -31,6 +31,20 @@ class MediaController extends GetxController {
   final RxList<ImageModel> allProductImages = <ImageModel>[].obs;
   final RxList<ImageModel> allUserImages = <ImageModel>[].obs;
 
+  @override
+  void onInit() {
+    super.onInit();
+
+    initializeDropzoneController();
+  }
+
+  /// Method for initialising the dropzoneController
+  void initializeDropzoneController() {
+    DropzoneView(onCreated: (DropzoneViewController controller) {
+      dropzoneController = controller;
+    });
+  }
+
   /// Select Local Images on Button Press
   Future<void> selectLocalImages() async {
     try {

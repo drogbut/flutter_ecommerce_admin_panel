@@ -9,7 +9,6 @@ import '../../../../../common/widgets/containers/rounded_container.dart';
 import '../../../../../common/widgets/images/t_rounded_image.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/enums.dart';
-import '../../../../../utils/constants/image_strings.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../controllers/media_controller.dart';
 
@@ -67,81 +66,22 @@ class LocalSelectedImagesArea extends StatelessWidget {
 
           /// Show Media
           Wrap(
-            spacing: TSizes.spaceBtwItems / 2,
-            runSpacing: TSizes.spaceBtwItems / 2,
-            children: [
-              TRoundedImage(
-                width: 90,
-                height: 90,
-                backgroundColor: TColors.primaryBackground,
-                imageType: ImageType.asset,
-                image: TImages.darkAppLogo,
-                //borderRadius: 10,
-                border: Border.all(color: TColors.primaryBackground, width: 2),
-                padding: 0,
-              ),
-              TRoundedImage(
-                width: 90,
-                height: 90,
-                backgroundColor: TColors.primaryBackground,
-                imageType: ImageType.asset,
-                image: TImages.darkAppLogo,
-                //borderRadius: 10,
-                border: Border.all(color: TColors.primaryBackground, width: 2),
-                padding: 0,
-              ),
-              TRoundedImage(
-                width: 90,
-                height: 90,
-                backgroundColor: TColors.primaryBackground,
-                imageType: ImageType.asset,
-                image: TImages.darkAppLogo,
-                //borderRadius: 10,
-                border: Border.all(color: TColors.primaryBackground, width: 2),
-                padding: 0,
-              ),
-              TRoundedImage(
-                width: 90,
-                height: 90,
-                backgroundColor: TColors.primaryBackground,
-                imageType: ImageType.asset,
-                image: TImages.darkAppLogo,
-                //borderRadius: 10,
-                border: Border.all(color: TColors.primaryBackground, width: 2),
-                padding: 0,
-              ),
-              TRoundedImage(
-                width: 90,
-                height: 90,
-                backgroundColor: TColors.primaryBackground,
-                imageType: ImageType.asset,
-                image: TImages.darkAppLogo,
-                //borderRadius: 10,
-                border: Border.all(color: TColors.primaryBackground, width: 2),
-                padding: 0,
-              ),
-              TRoundedImage(
-                width: 90,
-                height: 90,
-                backgroundColor: TColors.primaryBackground,
-                imageType: ImageType.asset,
-                image: TImages.darkAppLogo,
-                //borderRadius: 10,
-                border: Border.all(color: TColors.primaryBackground, width: 2),
-                padding: 0,
-              ),
-              TRoundedImage(
-                width: 90,
-                height: 90,
-                backgroundColor: TColors.primaryBackground,
-                imageType: ImageType.asset,
-                image: TImages.darkAppLogo,
-                //borderRadius: 10,
-                border: Border.all(color: TColors.primaryBackground, width: 2),
-                padding: 0,
-              ),
-            ],
-          ),
+              alignment: WrapAlignment.start,
+              spacing: TSizes.spaceBtwItems / 2,
+              runSpacing: TSizes.spaceBtwItems / 2,
+              children: controller.selectedImagesToUpload
+                  .where((image) => image.localImageToDisplay != null)
+                  .map((element) => TRoundedImage(
+                        width: 90,
+                        height: 90,
+                        backgroundColor: TColors.primaryBackground,
+                        border: Border.all(color: TColors.primaryBackground, width: 2),
+                        padding: 0,
+                        imageType: ImageType.memory,
+                        memoryImage: element.localImageToDisplay,
+                        //borderRadius: 10,
+                      ))
+                  .toList()),
 
           /// Mobile button
           if (TDeviceUtils.isMobileScreen(context))
