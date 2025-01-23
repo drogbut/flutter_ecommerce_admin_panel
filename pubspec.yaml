@@ -1,5 +1,5 @@
 name: flutter_ecommerce_admin_panel
-description: "A new Flutter project."
+description: "A Admin Panel for the Flutter E-Commerce."
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -12,14 +12,14 @@ dependencies:
 
   # Utility Packages
   intl: ^0.20.1
-  lottie: ^3.3.0
+  lottie: ^3.3.1
   shimmer: ^3.0.0
   clipboard: ^0.1.3
   image_picker: ^1.1.2
   url_launcher: ^6.3.1
   flutter_dropzone: ^4.2.1
   flutter_typeahead: ^5.2.0
-  connectivity_plus: ^6.1.1
+  connectivity_plus: ^6.1.2
   multi_select_flutter: ^4.1.3
   cached_network_image: ^3.4.1
   flutter_native_splash: ^2.4.4
@@ -29,7 +29,7 @@ dependencies:
   web: ^1.1.0
   http: ^1.2.2
   html: ^0.15.5
-  fl_chart: ^0.70.1
+  fl_chart: ^0.70.2
   data_table_2: ^2.5.18
   url_strategy: ^0.3.0
   universal_html: ^2.2.4
@@ -51,6 +51,7 @@ dependencies:
   # Others...
   freezed_annotation: ^2.4.4
   json_annotation: ^4.9.0
+  webview_flutter: ^4.10.0
 
 
 dev_dependencies:
@@ -60,7 +61,7 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   build_runner: ^2.4.14
   freezed: ^2.5.8
-  json_serializable: ^6.9.2
+  json_serializable: ^6.9.3
 
 
 flutter:
