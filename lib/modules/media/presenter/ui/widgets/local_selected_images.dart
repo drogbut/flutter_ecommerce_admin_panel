@@ -27,7 +27,7 @@ class LocalSelectedImagesArea extends StatelessWidget {
           /// Media images header
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
+            children: „[
               /// Selected folder text
               Row(
                 spacing: TSizes.spaceBtwItems,
