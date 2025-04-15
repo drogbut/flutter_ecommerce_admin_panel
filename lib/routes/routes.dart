@@ -14,12 +14,12 @@ class TRoutes {
     return [
       MenuItem(route: dashboard, icon: Icons.home, itemName: 'Dashboard'),
       MenuItem(route: media, icon: Icons.newspaper, itemName: 'Media'),
-      MenuItem(route: '/banners', icon: Icons.settings, itemName: 'Banners'),
-      MenuItem(route: '/products', icon: Icons.notifications, itemName: 'Products'),
-      MenuItem(route: '/categories', icon: Icons.help, itemName: 'Categories'),
-      MenuItem(route: '/customers', icon: Icons.info, itemName: 'Customers'),
-      MenuItem(route: '/orders', icon: Icons.info, itemName: 'customers'),
-      MenuItem(route: '/coupons', icon: Icons.info, itemName: 'coupons'),
+      // MenuItem(route: '/banners', icon: Icons.settings, itemName: 'Banners'),
+      // MenuItem(route: '/products', icon: Icons.notifications, itemName: 'Products'),
+      // MenuItem(route: '/categories', icon: Icons.help, itemName: 'Categories'),
+      // MenuItem(route: '/customers', icon: Icons.info, itemName: 'Customers'),
+      // MenuItem(route: '/orders', icon: Icons.info, itemName: 'customers'),
+      // MenuItem(route: '/coupons', icon: Icons.info, itemName: 'coupons'),
     ];
   }
 
@@ -27,11 +27,11 @@ class TRoutes {
   static List<MenuItem> settingsMenuItems() {
     return [
       MenuItem(route: '/profile', icon: Icons.person, itemName: 'Profile'),
-      MenuItem(route: '/settings', icon: Icons.settings, itemName: 'Settings'),
-      MenuItem(route: '/notifications', icon: Icons.notifications, itemName: 'Notifications'),
-      MenuItem(route: '/help', icon: Icons.help, itemName: 'Help'),
-      MenuItem(route: '/about', icon: Icons.info, itemName: 'About'),
-      MenuItem(route: login, icon: Icons.logout, itemName: 'Logout')
+      // MenuItem(route: '/settings', icon: Icons.settings, itemName: 'Settings'),
+      // MenuItem(route: '/notifications', icon: Icons.notifications, itemName: 'Notifications'),
+      // MenuItem(route: '/help', icon: Icons.help, itemName: 'Help'),
+      // MenuItem(route: '/about', icon: Icons.info, itemName: 'About'),
+      // MenuItem(route: login, icon: Icons.logout, itemName: 'Logout')
     ];
   }
 }

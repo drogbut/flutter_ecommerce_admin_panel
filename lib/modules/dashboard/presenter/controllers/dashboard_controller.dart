@@ -113,8 +113,6 @@ class DashboardController extends GetxController {
         return 'Processing';
       case OrderStatus.cancelled:
         return 'Cancelled';
-      default:
-        return 'unknown';
     }
   }
 }

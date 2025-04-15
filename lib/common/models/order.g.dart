@@ -6,8 +6,7 @@ part of 'order.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$OrderModelImpl _$$OrderModelImplFromJson(Map<String, dynamic> json) =>
-    _$OrderModelImpl(
+_OrderModel _$OrderModelFromJson(Map<String, dynamic> json) => _OrderModel(
       id: json['id'] as String,
       userId: json['userId'] as String? ?? '',
       docId: json['docId'] as String? ?? '',
@@ -19,7 +18,7 @@ _$OrderModelImpl _$$OrderModelImplFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['deliveryDate'] as String),
     );
 
-Map<String, dynamic> _$$OrderModelImplToJson(_$OrderModelImpl instance) =>
+Map<String, dynamic> _$OrderModelToJson(_OrderModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'userId': instance.userId,

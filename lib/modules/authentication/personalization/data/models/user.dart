@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 import '../../../../../utils/constants/enums.dart';
 import '../../../../../utils/formatters/formatter.dart';
 
@@ -8,7 +7,7 @@ part 'user.freezed.dart';
 part 'user.g.dart';
 
 @freezed
-class UserModel with _$UserModel {
+abstract class UserModel with _$UserModel {
   const UserModel._();
 
   const factory UserModel({

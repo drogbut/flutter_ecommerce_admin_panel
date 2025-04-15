@@ -8,7 +8,7 @@ part 'order.freezed.dart';
 part 'order.g.dart';
 
 @freezed
-class OrderModel with _$OrderModel {
+abstract class OrderModel with _$OrderModel {
   const OrderModel._();
 
   const factory OrderModel({

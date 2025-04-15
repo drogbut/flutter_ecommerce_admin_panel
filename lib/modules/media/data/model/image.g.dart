@@ -6,8 +6,7 @@ part of 'image.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ImageModelImpl _$$ImageModelImplFromJson(Map<String, dynamic> json) =>
-    _$ImageModelImpl(
+_ImageModel _$ImageModelFromJson(Map<String, dynamic> json) => _ImageModel(
       id: json['id'] as String? ?? '',
       url: json['url'] as String,
       folder: json['folder'] as String,
@@ -24,7 +23,7 @@ _$ImageModelImpl _$$ImageModelImplFromJson(Map<String, dynamic> json) =>
       contentType: json['contentType'] as String?,
     );
 
-Map<String, dynamic> _$$ImageModelImplToJson(_$ImageModelImpl instance) =>
+Map<String, dynamic> _$ImageModelToJson(_ImageModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'url': instance.url,

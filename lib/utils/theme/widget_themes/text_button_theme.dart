@@ -10,7 +10,7 @@ class TTextButtonTheme {
   /* -- Light Theme -- */
   static final lightTextButtonTheme = TextButtonThemeData(
     style: TextButton.styleFrom(
-      foregroundColor: TColors.primary.withOpacity(0.5),
+      foregroundColor: TColors.primary.withValues(alpha: 0.5),
       disabledForegroundColor: TColors.darkGrey,
       padding: const EdgeInsets.symmetric(vertical: TSizes.buttonHeight),
       textStyle: TextStyle(
