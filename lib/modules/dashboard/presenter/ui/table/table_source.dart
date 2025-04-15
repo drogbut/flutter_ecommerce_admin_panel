@@ -10,6 +10,7 @@ import '../../controllers/dashboard_controller.dart';
 
 class OrderRows extends DataTableSource {
   final controller = Get.put(DashboardController());
+
   @override
   DataRow? getRow(int index) {
     final order = controller.orders[index];
@@ -19,7 +20,10 @@ class OrderRows extends DataTableSource {
         DataCell(
           Text(
             order.id,
-            style: Theme.of(Get.context!).textTheme.bodyLarge?.copyWith(color: TColors.primary),
+            style: Theme.of(Get.context!)
+                .textTheme
+                .bodyLarge
+                ?.copyWith(color: TColors.primary),
           ),
         ),
         DataCell(Text(order.formattedOrderDate)),
@@ -27,11 +31,16 @@ class OrderRows extends DataTableSource {
         DataCell(
           TRoundedContainer(
             radius: TSizes.cardRadiusSm,
-            padding: EdgeInsets.symmetric(horizontal: TSizes.md, vertical: TSizes.xs),
-            backgroundColor: THelperFunctions.getOrderStatusColor(order.status).withOpacity(0.2),
+            padding: EdgeInsets.symmetric(
+                horizontal: TSizes.md, vertical: TSizes.xs),
+            backgroundColor: THelperFunctions.getOrderStatusColor(order.status)
+                .withValues(alpha: 0.2),
             child: Text(
               order.status.name.capitalize.toString(),
-              style: Theme.of(Get.context!).textTheme.bodyLarge?.copyWith(color: TColors.primary),
+              style: Theme.of(Get.context!)
+                  .textTheme
+                  .bodyLarge
+                  ?.copyWith(color: TColors.primary),
             ),
           ),
         ),

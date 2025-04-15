@@ -31,24 +31,15 @@ class MediaController extends GetxController {
   final RxList<ImageModel> allProductImages = <ImageModel>[].obs;
   final RxList<ImageModel> allUserImages = <ImageModel>[].obs;
 
-  @override
-  void onInit() {
-    super.onInit();
-
-    initializeDropzoneController();
-  }
-
-  /// Method for initialising the dropzoneController
-  void initializeDropzoneController() {
-    DropzoneView(onCreated: (DropzoneViewController controller) {
-      dropzoneController = controller;
-    });
-  }
+  final RxBool loading = false.obs;
+  final int initialLoadCount = 1;
+  final int loadMoreCount = 2;
 
   /// Select Local Images on Button Press
   Future<void> selectLocalImages() async {
     try {
-      final files = await dropzoneController.pickFiles(multiple: true, mime: ['image/jpeg', 'image/png']);
+      final files = await dropzoneController.pickFiles(
+          multiple: true, mime: ['image/jpeg', 'image/jpg', 'image/png']);
 
       if (files.isNotEmpty) {
         for (var file in files) {
@@ -65,6 +56,7 @@ class MediaController extends GetxController {
             filename: filename,
             contentType: mimeType,
             localImageToDisplay: Uint8List.fromList(bytes),
+            file: file,
           );
 
           selectedImagesToUpload.add(localImage);
@@ -73,22 +65,26 @@ class MediaController extends GetxController {
     } catch (e) {
       // Show a warning snack-bar for the error
       TLoaders.warningSnackBar(
-          title: 'Error Uploading Local Images', message: 'Something went wrong while uploading your local images.');
+          title: 'Error Uploading Local Images',
+          message: 'Something went wrong while uploading your local images.');
     }
   }
 
   /// Display a SnackBar when images is uploaded
   void uploadImageConfirmations() {
     if (selectedPath.value == MediaCategory.folders) {
-      TLoaders.warningSnackBar(title: 'Select folder', message: 'Please select the Folder in Order to upload Images.');
+      TLoaders.warningSnackBar(
+          title: 'Select folder',
+          message: 'Please select the Folder in Order to upload Images.');
       return;
     }
 
     TDialogs.defaultDialog(
-      context: Get.context!,
+      context: Get.overlayContext!,
       title: 'Upload Images',
       confirmText: 'Upload',
-      content: "Are you sure you want to upload all images in ${selectedPath.value.name.toUpperCase()} folder?",
+      content:
+          "Are you sure you want to upload all images in ${selectedPath.value.name.toUpperCase()} folder?",
       onConfirm: () async => await uploadImages(),
     );
   }
@@ -97,7 +93,7 @@ class MediaController extends GetxController {
   Future<void> uploadImages() async {
     try {
       // Close the confirmation dialog
-      Get.back();
+      if (Get.isDialogOpen ?? false) Get.back();
 
       // Show the loader dialog
       await uploadImagesLoader();
@@ -106,55 +102,31 @@ class MediaController extends GetxController {
       final MediaCategory selectedCategory = selectedPath.value;
 
       // Determine the target list based on the selected category
-      RxList<ImageModel> targetList;
-
-      // Check the selected category and update the corresponding list
-      switch (selectedCategory) {
-        case MediaCategory.banners:
-          targetList = allBannerImages;
-          break;
-        case MediaCategory.brands:
-          targetList = allBrandImages;
-          break;
-        case MediaCategory.categories:
-          targetList = allCategoryImages;
-          break;
-        case MediaCategory.products:
-          targetList = allProductImages;
-          break;
-        case MediaCategory.users:
-          targetList = allUserImages;
-          break;
-        default:
-          throw Exception('Invalid media category selected.');
-      }
+      final targetList = getCurrentImageList();
 
       // Upload and add images to the target list
       // Using a reverse loop to avoid 'Concurrent modification during iteration' error
       for (int i = selectedImagesToUpload.length - 1; i >= 0; i--) {
         final selectedImage = selectedImagesToUpload[i];
 
-        if (selectedImage.localImageToDisplay == null || selectedImage.contentType == null) {
+        if (selectedImage.localImageToDisplay == null ||
+            selectedImage.contentType == null) {
           throw Exception('Missing required data for image upload.');
         }
 
-        // Upload the image to storage
-        final uploadedImage = await mediaRepository.uploadImageFileInStorage(
-          fileData: selectedImage.localImageToDisplay!,
-          mimeType: selectedImage.contentType!,
+        final uploadedImage =
+            await mediaRepository.uploadImageFromDeviceToStorage(
+          data: selectedImage.localImageToDisplay!,
           path: getSelectedPath(),
           imageName: selectedImage.filename,
+          contentType: selectedImage.contentType!,
         );
 
-        // Assign additional properties
-        // Use the copyWith instead Setter
-        final updatedImage = uploadedImage.copyWith(mediaCategory: selectedCategory.name);
-
-        // Upload metadata to FireStore and get the ID
-        final id = await mediaRepository.uploadImageFileInDatabase(uploadedImage);
-
+        final updatedImage =
+            uploadedImage.copyWith(mediaCategory: selectedCategory.name);
+        final id =
+            await mediaRepository.uploadImageFileInDatabase(updatedImage);
         final imageWithId = updatedImage.copyWith(id: id);
-        //uploadedImage.id = id;
 
         // Remove the image from the local list and add it to the target list
         selectedImagesToUpload.removeAt(i);
@@ -162,42 +134,38 @@ class MediaController extends GetxController {
       }
 
       // Stop the loader after a successful upload
-      TFullScreenLoader.stopLoading();
-    } catch (e, stackTrace) {
-      // Log the error for debugging
-      print('Error uploading images: $e\n$stackTrace');
-
+      Get.back();
+    } catch (e) {
       // Stop the loader if an error occurs
       TFullScreenLoader.stopLoading();
 
       // Show an error snack-bar
       TLoaders.warningSnackBar(
         title: 'Error Uploading Images',
-        message: 'Something went wrong while uploading your images. Please try again.',
+        message:
+            'Something went wrong while uploading your images. Please try again.',
       );
     }
   }
 
   Future<void> uploadImagesLoader() {
-    return showDialog(
-      context: Get.context!,
+    return Get.dialog(
       barrierDismissible: false,
-      builder: (context) {
-        return PopScope(
-          canPop: false,
-          child: AlertDialog(
-            title: Text('Uploading images'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              spacing: TSizes.spaceBtwItems,
-              children: [
-                Image.asset(TImages.uploadingImageIllustration, height: 300, width: 300),
-                Text('sit tight, your image are uploading...'),
-              ],
-            ),
+      PopScope(
+        canPop: false,
+        child: AlertDialog(
+          title: Text('Uploading images'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            spacing: TSizes.spaceBtwItems,
+            children: [
+              Image.asset(TImages.uploadingImageIllustration,
+                  height: 300, width: 300),
+              Text('sit tight, your image are uploading...'),
+            ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 
@@ -216,6 +184,96 @@ class MediaController extends GetxController {
         return 'users/';
       default:
         throw Exception('Invalid media category selected.');
+    }
+  }
+
+  /// Get images
+  Future<void> getMediaImages() async {
+    try {
+      // start Loading
+      loading.value = true;
+
+      // Set a target list
+      final targetList = getCurrentImageList();
+
+      // Get all categories images
+      final images = await mediaRepository.fetchImagesFromDatabase(
+          mediaCategory: selectedPath.value, loadCount: initialLoadCount);
+
+      // Assign all to the target list
+      targetList.assignAll(images);
+
+      // Stop loading
+      loading.value = false;
+    } catch (e) {
+      loading.value = false;
+      TLoaders.errorSnackBar(
+          title: 'ohh Snap',
+          message: 'Unable to fetch images, something went wrong. Try again.');
+    }
+  }
+
+  /// Get images
+  Future<void> loadMoreMediaImages() async {
+    try {
+      // start Loading
+      loading.value = true;
+
+      // Get the right target list reference
+      RxList<ImageModel> targetList;
+
+      if (selectedPath.value == MediaCategory.banners) {
+        targetList = allBannerImages;
+      } else if (selectedPath.value == MediaCategory.brands) {
+        targetList = allBrandImages;
+      } else if (selectedPath.value == MediaCategory.products) {
+        targetList = allProductImages;
+      } else if (selectedPath.value == MediaCategory.users) {
+        targetList = allUserImages;
+      } else if (selectedPath.value == MediaCategory.categories) {
+        targetList = allCategoryImages;
+      } else {
+        loading.value = false;
+        return;
+      }
+
+      // Fetch more images based on last item's createAt
+      final images = await mediaRepository.loadMoreImagesFromDatabase(
+        mediaCategory: selectedPath.value,
+        loadCount: loadMoreCount,
+        lastFetchDate: targetList.isNotEmpty
+            ? targetList.last.createAt ?? DateTime.now()
+            : DateTime.now(),
+      );
+
+      // Add all images to the existing target list
+      targetList.addAll(images);
+
+      // Stop loading
+      loading.value = false;
+    } catch (e) {
+      loading.value = false;
+      TLoaders.errorSnackBar(
+          title: 'ohh Snap',
+          message: 'Unable to fetch images, something went wrong. Try again.');
+    }
+  }
+
+  /// Get current images list.
+  RxList<ImageModel> getCurrentImageList() {
+    switch (selectedPath.value) {
+      case MediaCategory.banners:
+        return allBannerImages;
+      case MediaCategory.brands:
+        return allBrandImages;
+      case MediaCategory.products:
+        return allProductImages;
+      case MediaCategory.users:
+        return allUserImages;
+      case MediaCategory.categories:
+        return allCategoryImages;
+      default:
+        return <ImageModel>[].obs;
     }
   }
 }

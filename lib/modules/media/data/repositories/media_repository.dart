@@ -4,48 +4,47 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:path/path.dart' as p;
 
+import '../../../../utils/constants/enums.dart';
 import '../model/image.dart';
 
 class MediaRepository extends GetxController {
-  /// instance
   static MediaRepository get instance => Get.find();
+
+  /// Firebase storage
   final _storage = FirebaseStorage.instance;
 
   /// Upload any Image using Uint8List (compatible with DropzoneFileInterface)
-  Future<ImageModel> uploadImageFileInStorage({
-    required Uint8List fileData,
-    required String mimeType,
+  Future<ImageModel> uploadImageFromDeviceToStorage({
+    required Uint8List data,
     required String path,
     required String imageName,
+    required String contentType,
   }) async {
     try {
       // Reference to the storage location
-      final Reference ref = _storage.ref('$path/$imageName');
+      final ref = _storage.ref(p.join(path, imageName));
+      final metadata = SettableMetadata(contentType: contentType);
 
-      // Upload file using Uint8List
-      final UploadTask uploadTask = ref.putData(fileData, SettableMetadata(contentType: mimeType));
+      await ref.putData(data, metadata);
+      final String downloadURL = await ref.getDownloadURL();
+      final FullMetadata fullMetadata = await ref.getMetadata();
 
-      // Wait for the upload to complete
-      final TaskSnapshot snapshot = await uploadTask.whenComplete(() => {});
-
-      // Get download URL
-      final String downloadURL = await snapshot.ref.getDownloadURL();
-
-      // Fetch metadata
-      final FullMetadata metadata = await ref.getMetadata();
-      return ImageModel.fromFirebaseMetadata(metadata, path, imageName, downloadURL);
+      return ImageModel.fromFirebaseMetadata(
+          fullMetadata, path, imageName, downloadURL);
     } on FirebaseException catch (e) {
-      throw e.message!;
+      throw e.message ?? 'An unknown firebase error occurred during upload.';
     } on SocketException catch (e) {
       throw e.message;
     } on PlatformException catch (e) {
-      throw e.message!;
+      throw e.message ?? 'An unknown platform error occurred during upload.';
     } catch (e) {
       throw e.toString();
     }
   }
 
+  /// Upload image data in FireStore
   Future<String> uploadImageFileInDatabase(ImageModel image) async {
     try {
       // Reference to the FireStore collection
@@ -60,11 +59,69 @@ class MediaRepository extends GetxController {
       // Return the ID of the document added
       return documentRef.id;
     } on FirebaseException catch (e) {
-      throw e.message!;
+      throw e.message ?? 'An unknown firebase error occurred during upload.';
     } on SocketException catch (e) {
       throw e.message;
     } on PlatformException catch (e) {
-      throw e.message!;
+      throw e.message ?? 'An unknown platform error occurred during upload.';
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  /// Fetch images from FireStore based of mediaCategory and loadCount
+  Future<List<ImageModel>> fetchImagesFromDatabase({
+    required MediaCategory mediaCategory,
+    required int loadCount,
+  }) async {
+    try {
+      // Reference to the FireStore collection
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection('images')
+          .where('mediaCategory', isEqualTo: mediaCategory.name.toString())
+          .orderBy('createAt', descending: true)
+          .limit(loadCount)
+          .get();
+
+      return querySnapshot.docs
+          .map((element) => ImageModel.fromSnapshot(element))
+          .toList();
+    } on FirebaseException catch (e) {
+      throw e.message ?? 'An unknown firebase error occurred during upload.';
+    } on SocketException catch (e) {
+      throw e.message;
+    } on PlatformException catch (e) {
+      throw e.message ?? 'An unknown platform error occurred during upload.';
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  /// Load more images from FireStore based of mediaCategory, oadCount and last fetch data.
+  Future<List<ImageModel>> loadMoreImagesFromDatabase({
+    required MediaCategory mediaCategory,
+    required int loadCount,
+    required DateTime lastFetchDate,
+  }) async {
+    try {
+      // Reference to the FireStore collection
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection('images')
+          .where('mediaCategory', isEqualTo: mediaCategory.name.toString())
+          .orderBy('createAt', descending: true)
+          .startAfter([lastFetchDate])
+          .limit(loadCount)
+          .get();
+
+      return querySnapshot.docs
+          .map((element) => ImageModel.fromSnapshot(element))
+          .toList();
+    } on FirebaseException catch (e) {
+      throw e.message ?? 'An unknown firebase error occurred during upload.';
+    } on SocketException catch (e) {
+      throw e.message;
+    } on PlatformException catch (e) {
+      throw e.message ?? 'An unknown platform error occurred during upload.';
     } catch (e) {
       throw e.toString();
     }

@@ -27,12 +27,13 @@ class LocalSelectedImagesArea extends StatelessWidget {
           /// Media images header
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: „[
+            children: [
               /// Selected folder text
               Row(
                 spacing: TSizes.spaceBtwItems,
                 children: [
-                  Text('Selected Folder', style: context.textTheme.headlineSmall),
+                  Text('Selected Folder',
+                      style: context.textTheme.headlineSmall),
 
                   /// Category DropDown menu
                   MediaFolderDropDown(
@@ -52,43 +53,56 @@ class LocalSelectedImagesArea extends StatelessWidget {
                   SizedBox(
                       width: TSizes.buttonWidth,
                       child: TTertiaryButton(
+                        style: context.textTheme.bodySmall
+                            ?.copyWith(color: TColors.error),
                         title: 'Remove All',
-                        onPressed: () {},
+                        onPressed: () =>
+                            controller.selectedImagesToUpload.clear(),
                       )),
 
                   /// Upload Button
                   if (!TDeviceUtils.isMobileScreen(context))
-                    SizedBox(width: TSizes.buttonWidth, child: TPrimaryButton(title: 'Upload', onPressed: () {})),
+                    SizedBox(
+                      width: TSizes.buttonWidth,
+                      child: TPrimaryButton(
+                        title: 'Upload',
+                        onPressed: () => controller.uploadImageConfirmations(),
+                      ),
+                    ),
                 ],
               ),
             ],
           ),
 
           /// Show Media
-          Wrap(
+          Obx(
+            () => Wrap(
               alignment: WrapAlignment.start,
               spacing: TSizes.spaceBtwItems / 2,
               runSpacing: TSizes.spaceBtwItems / 2,
               children: controller.selectedImagesToUpload
                   .where((image) => image.localImageToDisplay != null)
-                  .map((element) => TRoundedImage(
-                        width: 90,
-                        height: 90,
+                  .map((image) => TRoundedImage(
+                        width: 80,
+                        height: 100,
                         backgroundColor: TColors.primaryBackground,
-                        border: Border.all(color: TColors.primaryBackground, width: 2),
+                        border: Border.all(
+                            color: TColors.primaryBackground, width: 2),
                         padding: 0,
                         imageType: ImageType.memory,
-                        memoryImage: element.localImageToDisplay,
+                        memoryImage: image.localImageToDisplay,
+                        fit: BoxFit.cover,
                         //borderRadius: 10,
                       ))
-                  .toList()),
+                  .toList(),
+            ),
+          ),
 
           /// Mobile button
           if (TDeviceUtils.isMobileScreen(context))
             TPrimaryButton(
-              //width: double.infinity,
               title: 'Upload',
-              onPressed: () {},
+              onPressed: () => controller.uploadImageConfirmations(),
             )
         ],
       ),

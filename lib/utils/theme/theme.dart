@@ -46,7 +46,7 @@ class TAppTheme {
     appBarTheme: TAppBarTheme.darkAppBarTheme,
     checkboxTheme: TCheckboxTheme.darkCheckboxTheme,
     textButtonTheme: TTextButtonTheme.darkTextButtonTheme,
-    scaffoldBackgroundColor: TColors.primary.withOpacity(0.1),
+    scaffoldBackgroundColor: TColors.primary.withValues(alpha: 0.1),
     bottomSheetTheme: TBottomSheetTheme.darkBottomSheetTheme,
     elevatedButtonTheme: TElevatedButtonTheme.darkElevatedButtonTheme,
     outlinedButtonTheme: TOutlinedButtonTheme.darkOutlinedButtonTheme,

@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
+import 'package:get/get.dart';
 
 import '../../../../../common/widgets/containers/rounded_container.dart';
 import '../../../../../common/widgets/images/t_rounded_image.dart';
@@ -17,7 +18,7 @@ class DragAndDropArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = MediaController.instance;
+    final controller = Get.put(MediaController());
 
     return TRoundedContainer(
       height: 250,
@@ -30,7 +31,8 @@ class DragAndDropArea extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           /// Image
-          TRoundedImage(imageType: ImageType.asset, image: TImages.defaultMultiImageIcon),
+          TRoundedImage(
+              imageType: ImageType.asset, image: TImages.defaultMultiImageIcon),
 
           /// Text
           Flexible(
@@ -38,23 +40,20 @@ class DragAndDropArea extends StatelessWidget {
             child: Stack(
               children: [
                 DropzoneView(
-                  mime: ['image/jpg', 'image/png'],
+                  mime: ['image/jpeg', 'image/png', 'image/jpg'],
                   cursor: CursorType.grab,
                   operation: DragOperation.copy,
-                  onCreated: (DropzoneViewController ctrl) => controller.dropzoneController = ctrl,
-                  onLoaded: () => print('Zone loaded'),
-                  onError: (String? ev) => print('Error: $ev'),
-                  onHover: () => print('Zone hovered'),
-                  onDropString: (String s) => print('Drop: $s'),
-                  onDropStrings: (List<String>? strings) => print('Drop multiple: $strings'),
-                  onLeave: () => print('Zone left'),
-                  onDropFile: (DropzoneFileInterface ev) async {
+                  onCreated: (ctrl) => controller.dropzoneController = ctrl,
+                  onDropFile: (DropzoneFileInterface file) async {
                     // Retrieve file data as Uint8List
-                    final bytes = await controller.dropzoneController.getFileData(ev);
+                    final bytes =
+                        await controller.dropzoneController.getFileData(file);
 
                     // Extract file metadata
-                    final filename = await controller.dropzoneController.getFilename(ev);
-                    final mimeType = await controller.dropzoneController.getFileMIME(ev);
+                    final filename =
+                        await controller.dropzoneController.getFilename(file);
+                    final mimeType =
+                        await controller.dropzoneController.getFileMIME(file);
 
                     // Init the model
                     final image = ImageModel(
@@ -68,8 +67,6 @@ class DragAndDropArea extends StatelessWidget {
                     // Add to the list
                     controller.selectedImagesToUpload.add(image);
                   },
-                  onDropInvalid: (ev) => print('Zone invalid MIME: $ev'),
-                  onDropFiles: (ev) async => print('Zone drop multiple: $ev'),
                 ),
                 Center(child: Text('Drag and Drop files here')),
               ],

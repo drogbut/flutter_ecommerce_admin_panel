@@ -21,7 +21,9 @@ class TFullScreenLoader {
       builder: (_) => PopScope(
         canPop: false,
         child: Container(
-          color: THelperFunctions.isDarkMode(Get.context!) ? TColors.dark : TColors.white,
+          color: THelperFunctions.isDarkMode(Get.context!)
+              ? TColors.dark
+              : TColors.white,
           width: double.infinity,
           height: double.infinity,
           child: Column(
@@ -47,6 +49,6 @@ class TFullScreenLoader {
   /// Stop the currently open loading dialog.
   /// This method doesn't return anything.
   static stopLoading() {
-    Navigator.of(Get.overlayContext!).pop(); // Close the dialog using the Navigator
+    Get.back();
   }
 }

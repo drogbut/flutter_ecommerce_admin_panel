@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,114 +10,62 @@ part of 'order.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-OrderModel _$OrderModelFromJson(Map<String, dynamic> json) {
-  return _OrderModel.fromJson(json);
-}
 
 /// @nodoc
 mixin _$OrderModel {
-  String get id => throw _privateConstructorUsedError;
-  String get userId => throw _privateConstructorUsedError;
-  String get docId => throw _privateConstructorUsedError;
-  OrderStatus get status => throw _privateConstructorUsedError;
-  int get totalAmount => throw _privateConstructorUsedError;
-  DateTime get orderDate => throw _privateConstructorUsedError;
-  DateTime? get deliveryDate => throw _privateConstructorUsedError;
-
-  /// Serializes this OrderModel to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get id;
+  String get userId;
+  String get docId;
+  OrderStatus get status;
+  int get totalAmount;
+  DateTime get orderDate;
+  DateTime? get deliveryDate;
 
   /// Create a copy of OrderModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $OrderModelCopyWith<OrderModel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $OrderModelCopyWith<$Res> {
-  factory $OrderModelCopyWith(
-          OrderModel value, $Res Function(OrderModel) then) =
-      _$OrderModelCopyWithImpl<$Res, OrderModel>;
-  @useResult
-  $Res call(
-      {String id,
-      String userId,
-      String docId,
-      OrderStatus status,
-      int totalAmount,
-      DateTime orderDate,
-      DateTime? deliveryDate});
-}
-
-/// @nodoc
-class _$OrderModelCopyWithImpl<$Res, $Val extends OrderModel>
-    implements $OrderModelCopyWith<$Res> {
-  _$OrderModelCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of OrderModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $OrderModelCopyWith<OrderModel> get copyWith =>
+      _$OrderModelCopyWithImpl<OrderModel>(this as OrderModel, _$identity);
+
+  /// Serializes this OrderModel to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? id = null,
-    Object? userId = null,
-    Object? docId = null,
-    Object? status = null,
-    Object? totalAmount = null,
-    Object? orderDate = null,
-    Object? deliveryDate = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-      docId: null == docId
-          ? _value.docId
-          : docId // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as OrderStatus,
-      totalAmount: null == totalAmount
-          ? _value.totalAmount
-          : totalAmount // ignore: cast_nullable_to_non_nullable
-              as int,
-      orderDate: null == orderDate
-          ? _value.orderDate
-          : orderDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      deliveryDate: freezed == deliveryDate
-          ? _value.deliveryDate
-          : deliveryDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is OrderModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.docId, docId) || other.docId == docId) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.totalAmount, totalAmount) ||
+                other.totalAmount == totalAmount) &&
+            (identical(other.orderDate, orderDate) ||
+                other.orderDate == orderDate) &&
+            (identical(other.deliveryDate, deliveryDate) ||
+                other.deliveryDate == deliveryDate));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, userId, docId, status,
+      totalAmount, orderDate, deliveryDate);
+
+  @override
+  String toString() {
+    return 'OrderModel(id: $id, userId: $userId, docId: $docId, status: $status, totalAmount: $totalAmount, orderDate: $orderDate, deliveryDate: $deliveryDate)';
   }
 }
 
 /// @nodoc
-abstract class _$$OrderModelImplCopyWith<$Res>
-    implements $OrderModelCopyWith<$Res> {
-  factory _$$OrderModelImplCopyWith(
-          _$OrderModelImpl value, $Res Function(_$OrderModelImpl) then) =
-      __$$OrderModelImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $OrderModelCopyWith<$Res> {
+  factory $OrderModelCopyWith(
+          OrderModel value, $Res Function(OrderModel) _then) =
+      _$OrderModelCopyWithImpl;
   @useResult
   $Res call(
       {String id,
@@ -129,12 +78,11 @@ abstract class _$$OrderModelImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$OrderModelImplCopyWithImpl<$Res>
-    extends _$OrderModelCopyWithImpl<$Res, _$OrderModelImpl>
-    implements _$$OrderModelImplCopyWith<$Res> {
-  __$$OrderModelImplCopyWithImpl(
-      _$OrderModelImpl _value, $Res Function(_$OrderModelImpl) _then)
-      : super(_value, _then);
+class _$OrderModelCopyWithImpl<$Res> implements $OrderModelCopyWith<$Res> {
+  _$OrderModelCopyWithImpl(this._self, this._then);
+
+  final OrderModel _self;
+  final $Res Function(OrderModel) _then;
 
   /// Create a copy of OrderModel
   /// with the given fields replaced by the non-null parameter values.
@@ -149,33 +97,33 @@ class __$$OrderModelImplCopyWithImpl<$Res>
     Object? orderDate = null,
     Object? deliveryDate = freezed,
   }) {
-    return _then(_$OrderModelImpl(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       userId: null == userId
-          ? _value.userId
+          ? _self.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
       docId: null == docId
-          ? _value.docId
+          ? _self.docId
           : docId // ignore: cast_nullable_to_non_nullable
               as String,
       status: null == status
-          ? _value.status
+          ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
               as OrderStatus,
       totalAmount: null == totalAmount
-          ? _value.totalAmount
+          ? _self.totalAmount
           : totalAmount // ignore: cast_nullable_to_non_nullable
               as int,
       orderDate: null == orderDate
-          ? _value.orderDate
+          ? _self.orderDate
           : orderDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
       deliveryDate: freezed == deliveryDate
-          ? _value.deliveryDate
+          ? _self.deliveryDate
           : deliveryDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ));
@@ -184,8 +132,8 @@ class __$$OrderModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$OrderModelImpl extends _OrderModel {
-  const _$OrderModelImpl(
+class _OrderModel extends OrderModel {
+  const _OrderModel(
       {required this.id,
       this.userId = '',
       this.docId = '',
@@ -194,9 +142,8 @@ class _$OrderModelImpl extends _OrderModel {
       required this.orderDate,
       required this.deliveryDate})
       : super._();
-
-  factory _$OrderModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$OrderModelImplFromJson(json);
+  factory _OrderModel.fromJson(Map<String, dynamic> json) =>
+      _$OrderModelFromJson(json);
 
   @override
   final String id;
@@ -215,16 +162,26 @@ class _$OrderModelImpl extends _OrderModel {
   @override
   final DateTime? deliveryDate;
 
+  /// Create a copy of OrderModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'OrderModel(id: $id, userId: $userId, docId: $docId, status: $status, totalAmount: $totalAmount, orderDate: $orderDate, deliveryDate: $deliveryDate)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$OrderModelCopyWith<_OrderModel> get copyWith =>
+      __$OrderModelCopyWithImpl<_OrderModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$OrderModelToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$OrderModelImpl &&
+            other is _OrderModel &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.docId, docId) || other.docId == docId) &&
@@ -242,55 +199,81 @@ class _$OrderModelImpl extends _OrderModel {
   int get hashCode => Object.hash(runtimeType, id, userId, docId, status,
       totalAmount, orderDate, deliveryDate);
 
-  /// Create a copy of OrderModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$OrderModelImplCopyWith<_$OrderModelImpl> get copyWith =>
-      __$$OrderModelImplCopyWithImpl<_$OrderModelImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$OrderModelImplToJson(
-      this,
-    );
+  String toString() {
+    return 'OrderModel(id: $id, userId: $userId, docId: $docId, status: $status, totalAmount: $totalAmount, orderDate: $orderDate, deliveryDate: $deliveryDate)';
   }
 }
 
-abstract class _OrderModel extends OrderModel {
-  const factory _OrderModel(
-      {required final String id,
-      final String userId,
-      final String docId,
-      required final OrderStatus status,
-      required final int totalAmount,
-      required final DateTime orderDate,
-      required final DateTime? deliveryDate}) = _$OrderModelImpl;
-  const _OrderModel._() : super._();
+/// @nodoc
+abstract mixin class _$OrderModelCopyWith<$Res>
+    implements $OrderModelCopyWith<$Res> {
+  factory _$OrderModelCopyWith(
+          _OrderModel value, $Res Function(_OrderModel) _then) =
+      __$OrderModelCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String userId,
+      String docId,
+      OrderStatus status,
+      int totalAmount,
+      DateTime orderDate,
+      DateTime? deliveryDate});
+}
 
-  factory _OrderModel.fromJson(Map<String, dynamic> json) =
-      _$OrderModelImpl.fromJson;
+/// @nodoc
+class __$OrderModelCopyWithImpl<$Res> implements _$OrderModelCopyWith<$Res> {
+  __$OrderModelCopyWithImpl(this._self, this._then);
 
-  @override
-  String get id;
-  @override
-  String get userId;
-  @override
-  String get docId;
-  @override
-  OrderStatus get status;
-  @override
-  int get totalAmount;
-  @override
-  DateTime get orderDate;
-  @override
-  DateTime? get deliveryDate;
+  final _OrderModel _self;
+  final $Res Function(_OrderModel) _then;
 
   /// Create a copy of OrderModel
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$OrderModelImplCopyWith<_$OrderModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? userId = null,
+    Object? docId = null,
+    Object? status = null,
+    Object? totalAmount = null,
+    Object? orderDate = null,
+    Object? deliveryDate = freezed,
+  }) {
+    return _then(_OrderModel(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _self.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      docId: null == docId
+          ? _self.docId
+          : docId // ignore: cast_nullable_to_non_nullable
+              as String,
+      status: null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as OrderStatus,
+      totalAmount: null == totalAmount
+          ? _self.totalAmount
+          : totalAmount // ignore: cast_nullable_to_non_nullable
+              as int,
+      orderDate: null == orderDate
+          ? _self.orderDate
+          : orderDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      deliveryDate: freezed == deliveryDate
+          ? _self.deliveryDate
+          : deliveryDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
+  }
 }
+
+// dart format on
