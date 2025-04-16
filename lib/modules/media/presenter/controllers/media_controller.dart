@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
+import 'package:flutter_ecommerce_admin_panel/common/widgets/loaders/circular_loader.dart';
 import 'package:get/get.dart';
 
 import '../../../../utils/constants/enums.dart';
@@ -32,14 +33,14 @@ class MediaController extends GetxController {
   final RxList<ImageModel> allUserImages = <ImageModel>[].obs;
 
   final RxBool loading = false.obs;
+
   final int initialLoadCount = 1;
   final int loadMoreCount = 2;
 
   /// Select Local Images on Button Press
   Future<void> selectLocalImages() async {
     try {
-      final files = await dropzoneController.pickFiles(
-          multiple: true, mime: ['image/jpeg', 'image/jpg', 'image/png']);
+      final files = await dropzoneController.pickFiles(multiple: true, mime: ['image/jpeg', 'image/jpg', 'image/png']);
 
       if (files.isNotEmpty) {
         for (var file in files) {
@@ -65,17 +66,14 @@ class MediaController extends GetxController {
     } catch (e) {
       // Show a warning snack-bar for the error
       TLoaders.warningSnackBar(
-          title: 'Error Uploading Local Images',
-          message: 'Something went wrong while uploading your local images.');
+          title: 'Error Uploading Local Images', message: 'Something went wrong while uploading your local images.');
     }
   }
 
   /// Display a SnackBar when images is uploaded
   void uploadImageConfirmations() {
     if (selectedPath.value == MediaCategory.folders) {
-      TLoaders.warningSnackBar(
-          title: 'Select folder',
-          message: 'Please select the Folder in Order to upload Images.');
+      TLoaders.warningSnackBar(title: 'Select folder', message: 'Please select the Folder in Order to upload Images.');
       return;
     }
 
@@ -83,9 +81,11 @@ class MediaController extends GetxController {
       context: Get.overlayContext!,
       title: 'Upload Images',
       confirmText: 'Upload',
-      content:
-          "Are you sure you want to upload all images in ${selectedPath.value.name.toUpperCase()} folder?",
-      onConfirm: () async => await uploadImages(),
+      content: "Are you sure you want to upload all images in ${selectedPath.value.name.toUpperCase()} folder?",
+      onConfirm: () async {
+        Get.back();
+        await uploadImages();
+      },
     );
   }
 
@@ -96,7 +96,7 @@ class MediaController extends GetxController {
       if (Get.isDialogOpen ?? false) Get.back();
 
       // Show the loader dialog
-      await uploadImagesLoader();
+      uploadImagesLoader();
 
       // Get the selected category
       final MediaCategory selectedCategory = selectedPath.value;
@@ -109,23 +109,19 @@ class MediaController extends GetxController {
       for (int i = selectedImagesToUpload.length - 1; i >= 0; i--) {
         final selectedImage = selectedImagesToUpload[i];
 
-        if (selectedImage.localImageToDisplay == null ||
-            selectedImage.contentType == null) {
+        if (selectedImage.localImageToDisplay == null || selectedImage.contentType == null) {
           throw Exception('Missing required data for image upload.');
         }
 
-        final uploadedImage =
-            await mediaRepository.uploadImageFromDeviceToStorage(
+        final uploadedImage = await mediaRepository.uploadImageFromDeviceToStorage(
           data: selectedImage.localImageToDisplay!,
           path: getSelectedPath(),
           imageName: selectedImage.filename,
           contentType: selectedImage.contentType!,
         );
 
-        final updatedImage =
-            uploadedImage.copyWith(mediaCategory: selectedCategory.name);
-        final id =
-            await mediaRepository.uploadImageFileInDatabase(updatedImage);
+        final updatedImage = uploadedImage.copyWith(mediaCategory: selectedCategory.name);
+        final id = await mediaRepository.uploadImageFileInDatabase(updatedImage);
         final imageWithId = updatedImage.copyWith(id: id);
 
         // Remove the image from the local list and add it to the target list
@@ -141,10 +137,8 @@ class MediaController extends GetxController {
 
       // Show an error snack-bar
       TLoaders.warningSnackBar(
-        title: 'Error Uploading Images',
-        message:
-            'Something went wrong while uploading your images. Please try again.',
-      );
+          title: 'Error Uploading Images',
+          message: 'Something went wrong while uploading your images. Please try again.');
     }
   }
 
@@ -159,8 +153,7 @@ class MediaController extends GetxController {
             mainAxisSize: MainAxisSize.min,
             spacing: TSizes.spaceBtwItems,
             children: [
-              Image.asset(TImages.uploadingImageIllustration,
-                  height: 300, width: 300),
+              Image.asset(TImages.uploadingImageIllustration, height: 300, width: 300),
               Text('sit tight, your image are uploading...'),
             ],
           ),
@@ -197,8 +190,8 @@ class MediaController extends GetxController {
       final targetList = getCurrentImageList();
 
       // Get all categories images
-      final images = await mediaRepository.fetchImagesFromDatabase(
-          mediaCategory: selectedPath.value, loadCount: initialLoadCount);
+      final images =
+          await mediaRepository.fetchImagesFromDatabase(mediaCategory: selectedPath.value, loadCount: initialLoadCount);
 
       // Assign all to the target list
       targetList.assignAll(images);
@@ -207,9 +200,7 @@ class MediaController extends GetxController {
       loading.value = false;
     } catch (e) {
       loading.value = false;
-      TLoaders.errorSnackBar(
-          title: 'ohh Snap',
-          message: 'Unable to fetch images, something went wrong. Try again.');
+      TLoaders.errorSnackBar(title: 'ohh Snap', message: 'Unable to fetch images, something went wrong. Try again.');
     }
   }
 
@@ -241,9 +232,7 @@ class MediaController extends GetxController {
       final images = await mediaRepository.loadMoreImagesFromDatabase(
         mediaCategory: selectedPath.value,
         loadCount: loadMoreCount,
-        lastFetchDate: targetList.isNotEmpty
-            ? targetList.last.createAt ?? DateTime.now()
-            : DateTime.now(),
+        lastFetchDate: targetList.isNotEmpty ? targetList.last.createAt ?? DateTime.now() : DateTime.now(),
       );
 
       // Add all images to the existing target list
@@ -253,9 +242,7 @@ class MediaController extends GetxController {
       loading.value = false;
     } catch (e) {
       loading.value = false;
-      TLoaders.errorSnackBar(
-          title: 'ohh Snap',
-          message: 'Unable to fetch images, something went wrong. Try again.');
+      TLoaders.errorSnackBar(title: 'ohh Snap', message: 'Unable to fetch images, something went wrong. Try again.');
     }
   }
 
@@ -274,6 +261,66 @@ class MediaController extends GetxController {
         return allCategoryImages;
       default:
         return <ImageModel>[].obs;
+    }
+  }
+
+  /// Display a SnackBar when images is deleted.
+  void removeCloudImageConfirmations(ImageModel image) {
+    TDialogs.defaultDialog(
+      context: Get.overlayContext!,
+      title: 'Delete Images',
+      confirmText: 'Delete',
+      content: "Are you sure you want to delete this image ?",
+      onConfirm: () async {
+        // close the previous dialog
+        Get.back();
+
+        await removeCloudImage(image);
+      },
+    );
+  }
+
+  /// Delete the image
+  Future<void> removeCloudImage(ImageModel image) async {
+    try {
+      // Close the deleting dialog
+      if (Get.isDialogOpen ?? false) Get.back();
+
+      // Show loader
+      Get.defaultDialog(
+          title: '',
+          barrierDismissible: true,
+          backgroundColor: Colors.transparent,
+          content: const PopScope(
+              canPop: false,
+              child: SizedBox(
+                width: 150,
+                height: 150,
+                child: TCircularLoader(),
+              )));
+
+      // Delete image
+      await mediaRepository.deleteImagesFromStorage(image: image);
+
+      // Determine the target list based on the selected category
+      final targetList = getCurrentImageList();
+
+      // remove from the list
+      targetList.remove(image);
+      update();
+
+      // Stop the loader
+      Get.back();
+      TLoaders.successSnackBar(title: 'image Deleted', message: 'Image successfully deleted from your cloud storage');
+    } catch (e) {
+      // Stop the loader if an error occurs
+      TFullScreenLoader.stopLoading();
+
+      // Show an error snack-bar
+      TLoaders.errorSnackBar(
+        title: 'Error Deleting Image',
+        message: 'Something went wrong while deleting your image. Please try again.',
+      );
     }
   }
 }

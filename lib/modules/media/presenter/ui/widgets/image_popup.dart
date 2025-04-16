@@ -4,6 +4,7 @@ import 'package:flutter_ecommerce_admin_panel/common/widgets/buttons/tertiary.da
 import 'package:flutter_ecommerce_admin_panel/common/widgets/containers/rounded_container.dart';
 import 'package:flutter_ecommerce_admin_panel/common/widgets/images/t_rounded_image.dart';
 import 'package:flutter_ecommerce_admin_panel/modules/media/data/model/image.dart';
+import 'package:flutter_ecommerce_admin_panel/modules/media/presenter/controllers/media_controller.dart';
 import 'package:flutter_ecommerce_admin_panel/utils/constants/colors.dart';
 import 'package:flutter_ecommerce_admin_panel/utils/constants/enums.dart';
 import 'package:flutter_ecommerce_admin_panel/utils/constants/sizes.dart';
@@ -24,12 +25,10 @@ class ImagePopup extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Dialog(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(TSizes.borderRadiusLg)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(TSizes.borderRadiusLg)),
         child: LayoutBuilder(builder: (context, constraints) {
-          final double dialogWidth = TDeviceUtils.isDesktopScreen(context)
-              ? constraints.maxWidth * 0.4
-              : double.infinity;
+          final double dialogWidth =
+              TDeviceUtils.isDesktopScreen(context) ? constraints.maxWidth * 0.4 : double.infinity;
 
           return TRoundedContainer(
             width: dialogWidth,
@@ -56,9 +55,7 @@ class ImagePopup extends StatelessWidget {
                       Positioned(
                           top: 0,
                           right: 0,
-                          child: IconButton(
-                              onPressed: () => Get.back(),
-                              icon: Icon(Iconsax.close_circle)))
+                          child: IconButton(onPressed: () => Get.back(), icon: Icon(Iconsax.close_circle)))
                     ],
                   ),
                 ),
@@ -68,22 +65,15 @@ class ImagePopup extends StatelessWidget {
                 // Display various metadata about image.
                 Row(
                   children: [
-                    Expanded(
-                        child: Text('Image Name:',
-                            style: context.textTheme.bodyLarge)),
-                    Expanded(
-                        flex: 3,
-                        child: Text(imageModel.filename,
-                            style: context.textTheme.titleLarge)),
+                    Expanded(child: Text('Image Name:', style: context.textTheme.bodyLarge)),
+                    Expanded(flex: 3, child: Text(imageModel.filename, style: context.textTheme.titleLarge)),
                   ],
                 ),
 
                 // Display the url image with the option to click on it.
                 Row(
                   children: [
-                    Expanded(
-                        child: Text('Image Url:',
-                            style: context.textTheme.bodyLarge)),
+                    Expanded(child: Text('Image Url:', style: context.textTheme.bodyLarge)),
                     Expanded(
                         flex: 2,
                         child: Text(
@@ -95,8 +85,8 @@ class ImagePopup extends StatelessWidget {
                     Expanded(
                         child: OutlinedButton(
                       onPressed: () {
-                        FlutterClipboard.copy(imageModel.url).then((value) =>
-                            TLoaders.customToast(message: 'URL copied!'));
+                        FlutterClipboard.copy(imageModel.url)
+                            .then((value) => TLoaders.customToast(message: 'URL copied!'));
                       },
                       child: Text('copy url'),
                     ))
@@ -110,7 +100,7 @@ class ImagePopup extends StatelessWidget {
                     SizedBox(
                       width: 300,
                       child: TTertiaryButton(
-                        onPressed: () {},
+                        onPressed: () => MediaController.instance.removeCloudImageConfirmations(imageModel),
                         title: 'Delete Image',
                       ),
                     ),

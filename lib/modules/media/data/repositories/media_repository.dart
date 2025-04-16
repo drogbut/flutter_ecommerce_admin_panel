@@ -14,6 +14,7 @@ class MediaRepository extends GetxController {
 
   /// Firebase storage
   final _storage = FirebaseStorage.instance;
+  final _db = FirebaseFirestore.instance;
 
   /// Upload any Image using Uint8List (compatible with DropzoneFileInterface)
   Future<ImageModel> uploadImageFromDeviceToStorage({
@@ -31,8 +32,7 @@ class MediaRepository extends GetxController {
       final String downloadURL = await ref.getDownloadURL();
       final FullMetadata fullMetadata = await ref.getMetadata();
 
-      return ImageModel.fromFirebaseMetadata(
-          fullMetadata, path, imageName, downloadURL);
+      return ImageModel.fromFirebaseMetadata(fullMetadata, path, imageName, downloadURL);
     } on FirebaseException catch (e) {
       throw e.message ?? 'An unknown firebase error occurred during upload.';
     } on SocketException catch (e) {
@@ -83,9 +83,7 @@ class MediaRepository extends GetxController {
           .limit(loadCount)
           .get();
 
-      return querySnapshot.docs
-          .map((element) => ImageModel.fromSnapshot(element))
-          .toList();
+      return querySnapshot.docs.map((element) => ImageModel.fromSnapshot(element)).toList();
     } on FirebaseException catch (e) {
       throw e.message ?? 'An unknown firebase error occurred during upload.';
     } on SocketException catch (e) {
@@ -113,15 +111,29 @@ class MediaRepository extends GetxController {
           .limit(loadCount)
           .get();
 
-      return querySnapshot.docs
-          .map((element) => ImageModel.fromSnapshot(element))
-          .toList();
+      return querySnapshot.docs.map((element) => ImageModel.fromSnapshot(element)).toList();
     } on FirebaseException catch (e) {
       throw e.message ?? 'An unknown firebase error occurred during upload.';
     } on SocketException catch (e) {
       throw e.message;
     } on PlatformException catch (e) {
       throw e.message ?? 'An unknown platform error occurred during upload.';
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  /// delete image from Firebase storage
+  Future<void> deleteImagesFromStorage({required ImageModel image}) async {
+    try {
+      await _storage.ref(image.fullPath).delete();
+      await _db.collection("images").doc(image.id).delete();
+    } on FirebaseException catch (e) {
+      throw e.message ?? 'An unknown firebase error occurred during deleting images.';
+    } on SocketException catch (e) {
+      throw e.message;
+    } on PlatformException catch (e) {
+      throw e.message ?? 'An unknown platform error occurred during deleting images.';
     } catch (e) {
       throw e.toString();
     }
